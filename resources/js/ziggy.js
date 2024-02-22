@@ -1,0 +1,7 @@
+const Ziggy = {"url":"http:\/\/localhost","port":null,"defaults":{},"routes":{"sanctum.csrf-cookie":{"uri":"sanctum\/csrf-cookie","methods":["GET","HEAD"]},"ignition.healthCheck":{"uri":"_ignition\/health-check","methods":["GET","HEAD"]},"ignition.executeSolution":{"uri":"_ignition\/execute-solution","methods":["POST"]},"ignition.updateConfig":{"uri":"_ignition\/update-config","methods":["POST"]},"login":{"uri":"login","methods":["GET","HEAD"]},"book.comment":{"uri":"books\/{book}","methods":["POST"],"parameters":["book"],"bindings":{"book":"id"}},"books":{"uri":"books","methods":["GET","HEAD"]},"book.create":{"uri":"books\/create","methods":["GET","HEAD"]},"book.store":{"uri":"books","methods":["POST"]},"book.edit":{"uri":"books\/{book}\/edit","methods":["GET","HEAD"],"parameters":["book"],"bindings":{"book":"id"}},"book.show":{"uri":"books\/{book}","methods":["GET","HEAD"],"parameters":["book"],"bindings":{"book":"id"}},"book.bookshelf":{"uri":"bookshelf","methods":["GET","HEAD"]},"book.comment.delete":{"uri":"books\/{book}\/{bookComments}","methods":["POST"],"parameters":["book","bookComments"],"bindings":{"book":"id","bookComments":"id"}},"book.comment.update":{"uri":"books\/{book}\/{bookComments}","methods":["PUT"],"parameters":["book","bookComments"],"bindings":{"book":"id","bookComments":"id"}}}};
+
+if (typeof window !== 'undefined' && typeof window.Ziggy !== 'undefined') {
+    Object.assign(Ziggy.routes, window.Ziggy.routes);
+}
+
+export { Ziggy };

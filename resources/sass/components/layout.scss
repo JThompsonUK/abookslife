@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    position: relative;
+    margin: 0 auto!important;
+    max-width: 1440px;
+}
+
+.home-container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background-color: #1abc9c;
+
+    div {
+        display: flex;
+        justify-content: center;
+        padding: 10px 50px 50px 50px;
+    }
+}

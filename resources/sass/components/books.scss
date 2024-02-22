@@ -1,0 +1,50 @@
+.book-listing {
+    margin-bottom: 40px;
+
+    &__cover {
+
+        img {
+            height: 250px;
+        }
+
+    }
+
+    &__info {
+
+        div {
+            display: flex;
+        }
+
+        &--rating {
+
+            svg {
+                width: 15px;
+            }
+        }
+
+        &--icon {
+            height: 30px;
+            width: 30px;
+        }
+
+    }
+}
+
+
+// Book Item
+.book-item {
+    &__right {
+
+        &--rating {
+
+            svg {
+                width: 15px;
+            }
+        }
+
+        &--icon {
+            height: 30px;
+            width: 30px;
+        }
+    }
+}

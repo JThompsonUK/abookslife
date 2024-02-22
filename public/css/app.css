@@ -1,0 +1,49 @@
+.footer-container {
+  height: 50px;
+}
+
+.book-listing {
+  margin-bottom: 40px;
+}
+.book-listing__cover img {
+  height: 250px;
+}
+.book-listing__info div {
+  display: flex;
+}
+.book-listing__info--rating svg {
+  width: 15px;
+}
+.book-listing__info--icon {
+  height: 30px;
+  width: 30px;
+}
+
+.book-item__right--rating svg {
+  width: 15px;
+}
+.book-item__right--icon {
+  height: 30px;
+  width: 30px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  position: relative;
+  margin: 0 auto !important;
+  max-width: 1440px;
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  background-color: #1abc9c;
+}
+.home-container div {
+  display: flex;
+  justify-content: center;
+  padding: 10px 50px 50px 50px;
+}
