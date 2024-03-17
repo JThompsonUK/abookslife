@@ -1,43 +1,51 @@
 <template>
-    <div>
-        <div>
-            <h1>{{ formData.book_title }}</h1>
-        </div>
-
-        <div>
+    <Head title="Book Item Edit" />
+    <div class="py-4">
+        <div class="p-5 mb-4 bg-light rounded-3">
             <form @submit.prevent="submitForm">
-                <div class="form-row mb-3">
-                    <label for="image">Book Cover:</label>
-                    <input type="file" @change="handleFileUpload" />
-
-<!--                    <img :src="'/storage/images/' + '7hJpO5ToX0qPaBEEQnfKpZeESdUFQ5pjmo019ABc.jpg'" alt="" title="" />-->
-
-<!--                    <img :src="'/storage/images/7hJpO5ToX0qPaBEEQnfKpZeESdUFQ5pjmo019ABc.jpg'" alt="" title="" />-->
-
-                    <img :src="book.image" alt="Profile Image" class="img-fluid rounded" />
-
-                    <img :src="'/' + previewImage" alt="Book Cover Preview" v-if="previewImage" style="max-width: 200px; margin-top: 10px;" />
-                </div>
-                <div class="form-row mb-3">
-                    <div class="col-md-8 p-0">
-                        <label for="title">Title:</label>
-                        <input v-model="formData.book_title" type="text" class="form-control" id="title" placeholder="Title" name="title" required />
+                <div class="container-fluid row">
+                    <div class="col-md-2">
+                        <div :style="{
+                            backgroundImage: 'url(/images/book-layout-front.svg)',
+                            width: '100%',
+                            height: '100%',
+                            backgroundRepeat: 'no-repeat',
+                            maxHeight: '240px'
+                        }">
+                            <img :src="book.image" alt="Book Cover Image" style="width: 100%; padding: 20px 25px 20px 20px;" />
+                        </div>                    
+                        <div>
+                            <input type="file" @change="handleFileUpload" />
+                        </div>
                     </div>
-                    <div class="col-md-4 pr-0">
-                        <label for="genre">Genre</label>
-                        <input v-model="formData.book_genre" type="text" class="form-control" id="genre" placeholder="Genre" name="genre" required />
+
+                    <div class="col-md-10">
+                        <div class="form-row mb-3">
+                            <div class="col-md-8 p-0">
+                                <label for="title">Title:</label>
+                                <input v-model="formData.book_title" type="text" class="form-control" id="title" placeholder="Title" name="title" required />
+                            </div>
+                            <div class="col-md-4 pr-0">
+                                <label for="genre">Genre</label>
+                                <input v-model="formData.book_genre" type="text" class="form-control" id="genre" placeholder="Genre" name="genre" required />
+                            </div>
+                        </div>
+                        <div class="form-row mb-3">
+                            <label for="author">Author</label>
+                            <input v-model="formData.book_author" type="text" class="form-control" id="author" placeholder="Author" name="author" required />
+                        </div>
+                        <div class="form-row mb-3">
+                            <label for="description">Description</label>
+                            <textarea v-model="formData.description" class="form-control" id="description" placeholder="Description" name="description" rows="3"></textarea>
+                        </div>
+
+                        <div>
+                            <a :href="route('book.show', book.uuid)" class="btn btn-secondary">
+                                Cancel
+                            </a>    
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
                     </div>
-                </div>
-                <div class="form-row mb-3">
-                    <label for="author">Author</label>
-                    <input v-model="formData.book_author" type="text" class="form-control" id="author" placeholder="Author" name="author" required />
-                </div>
-                <div class="form-row mb-3">
-                    <label for="description">Description</label>
-                    <textarea v-model="formData.description" class="form-control" id="description" placeholder="Description" name="description" rows="3" required></textarea>
-                </div>
-                <div>
-                    <button type="submit">Submit</button>
                 </div>
             </form>
         </div>
@@ -59,18 +67,18 @@ export default {
                 description: this.book.description,
             },
             previewImage: null,
+            file: null,
         };
     },
     methods: {
         submitForm() {
-            this.$inertia.post(`/submit-form/${this.book.id}`, this.formData);
+            this.$inertia.post(`/submit-form/${this.book.uuid}`, this.formData);
         },
         handleFileUpload(event) {
             const file = event.target.files[0];
 
             if (file) {
                 this.formData.book_cover = file;
-                this.previewImage = URL.createObjectURL(file);
             }
         },
     },

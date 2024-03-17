@@ -9,9 +9,15 @@ use Inertia\Inertia;
 
 class LoginController extends Controller
 {
-    public function create()
-    {
-        return Inertia::render('Auth/Login');
+    public function create(Request $request)
+    { 
+        $redirect = $request->input('redirect');
+
+        return Inertia::render('Auth/Login', [
+            'redirect' => $redirect,
+        ]);
+
+        // return Inertia::render('Auth/Login');    
     }
 
     public function store(Request $request)
@@ -24,7 +30,10 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended();
+            // Get the redirect URL from the query parameter or use a default if not provided
+            $redirectUrl = $request->input('redirect', url('/'));
+            
+            return redirect()->intended($redirectUrl);
         }
 
         return back()->withErrors([

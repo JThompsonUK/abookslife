@@ -17,15 +17,28 @@
 <!--    </nav>-->
 
 
-
-    <nav>
-        <div>
-            <a href="/">Welcome</a>
+    <header class="py-3 mb-4 border-bottom">
+        <div class="d-flex w-50 justify-content-between">
+            <a href="/">Home </a>
             <a href="/books"> Books </a>
             <a href="/bookshelf"> Bookshelf</a>
-            <a href="/login"> Login</a>
+            <span v-if="username">
+                <a href="/users/profile/edit"> Profile ({{username}})</a>
+            </span>
+            <span v-if="username">
+                <a href="/logout"> Logout</a>
+            </span>
+            <span v-else>
+                <a href="/login"> Login/Register</a>
+            </span>
+            <form @submit.prevent="searchRef" style="width: 200px; display: flex;">
+                <input v-model="searchQuery" type="text" class="form-control" id="reference" placeholder="Reference" name="reference" />
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+                   
         </div>
-    </nav>
+    </header>
+    
 
 
 <!--    <nav>-->
@@ -68,5 +81,20 @@ import NavLink from "./NavLink";
 
 export default {
     components: { NavLink },
+
+    props: {
+        username: String,
+    },
+    data() {
+        return {
+            searchQuery: '',
+        };
+    },
+
+    methods: {
+        searchRef() {
+            this.$inertia.post(this.route('search.reference'), { query: this.searchQuery })
+        },        
+    },
 };
 </script>

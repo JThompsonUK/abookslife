@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Book extends Model
 {
@@ -19,17 +21,51 @@ class Book extends Model
      * @var array
      */
     protected $fillable = [
+        'uuid',
         'book_title',
         'book_author',
         'book_genre',
         'description',
+        'book_year',
         'reference',
-        'code',
         'user_id_owner',
         'book_cover',
     ];
 
     protected $appends = ['image'];
+    // protected $guarded = ['id']; // Make sure 'id' is guarded or fillable
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'id'
+    ];
+
+    /**
+     * Generate a UUID before saving.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->uuid = Str::uuid();
+        });
+    }
+
+    // use HasUuids;
+
+
+    /**
+     * Use 'uuid' instead of 'id' when resolving routes.
+     */
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
 
     /**
      * A given book has one owner.
@@ -55,20 +91,32 @@ class Book extends Model
         return $this->hasMany(BookComments::class);
     }
 
+    /**
+     * Generate a random string with a total length of 5 (text and digits)
+     */
     public static function generateUniqueReference()
     {
-        $min = 00000; // Minimum 5-digit number
-        $max = 99999; // Maximum 5-digit number
-
-        // Generate a unique 5-digit reference
-        $reference = random_int($min, $max);
+        $randomString = self::generateRandomCharacters(5);
 
         // Ensure the generated reference is unique
-        while (self::where('reference', $reference)->exists()) {
-            $reference = random_int($min, $max);
+        while (self::where('reference', $randomString)->exists()) {
+            // Regenerate if not unique
+            $randomString = self::generateRandomCharacters(6);
         }
 
-        return $reference;
+        return $randomString;
+    }
+
+    private static function generateRandomCharacters($length)
+    {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $randomString = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[random_int(0, strlen($characters) - 1)];
+        }
+
+        return $randomString;
     }
 
     /**
@@ -85,7 +133,7 @@ class Book extends Model
     public static function isBookWithUser($book)
     {
         if (Auth::user()) {
-            return $book->bookCheckout->where('user_id', Auth::user()->id)->whereNull('checkin_date')->isNotEmpty();
+            return $book->bookCheckout->where('user_id', Auth::user()->id)->sortByDesc('created_at')->first();
         }
     }
 
@@ -104,7 +152,23 @@ class Book extends Model
     }
 
     public function getImageAttribute() {
-        return asset('storage/'.$this->book_cover);
+        return asset('storage/images/' . basename($this->book_cover));
+    }
+
+
+    /**
+     * Get the locations for each checkout
+     */
+    public static function checkoutMarkers($book)
+    {
+        $markers = $book->bookCheckout->map(function ($book) {
+            return [
+                'lat' => floatval($book->lat),
+                'lng' => floatval($book->lng),
+            ];
+        })->toArray();
+
+        return $markers;
     }
 
 }

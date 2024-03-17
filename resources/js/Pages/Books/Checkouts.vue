@@ -1,8 +1,5 @@
 <template>
     <div style="padding: 10px; background: beige; border-radius: 5px;">
-
-
-
         <div class="py-2 d-flex justify-content-center">
             <h5>Checkout Card</h5>
         </div>

@@ -27,46 +27,51 @@ class BooksController extends Controller
                 })
                 ->paginate(10)
                 ->withQueryString()
-                ->through(fn($book) => [
-                    'id' => $book->id,
-                    'book_title' => $book->book_title,
-                    'book_author' => $book->book_author,
-                    'book_genre' => $book->book_genre,
-//                    'can' => [
-//                        'edit' => Auth::user()->can('edit', $user)
-//                    ]
-                ]),
+                ->through(function ($book) {
+                    $checkoutMarkers = Book::checkoutMarkers($book);
+                    $distanceTravelled = round(BookCheckout::calculateHaversineDistance($checkoutMarkers), 0);
 
+                    return [
+                        'uuid' => $book->uuid,
+                        'book_title' => $book->book_title,
+                        'book_author' => $book->book_author,
+                        'book_genre' => $book->book_genre,
+                        'image' => $book->image,
+                        'book_checkout' => $book->bookCheckout,
+                        'distance_travelled' => $distanceTravelled,
+                    ];
+                }),
             'filters' => Request::only(['search']),
-//            'can' => [
-//                'createUser' => Auth::user()->can('create', User::class)
-//            ]
         ]);
 
-//        return Inertia::render('Books/Index', [
-////            'filters' => Request::all('search', 'trashed'),
-//            'books' => Book::orderBy('book_title')
-//                ->get()
-////                ->transform(fn ($books) => [
-////                    'id' => $books->id,
-////                    'book_title' => $books->book_title,
-////                    'book_author' => $books->book_author,
-////                ]),
-//        ]);
     }
 
     public function bookshelf()
     {
         return Inertia::render('Books/Bookshelf', [
-//            'filters' => Request::all('search', 'trashed'),
-            'books' => Book::orderBy('book_title')
-                ->where('user_id_owner', Auth::id())
+            'books' => Book::with('bookCheckout')
+                ->orderBy('book_title')
+                ->where(function ($query) {
+                    $query->where('user_id_owner', Auth::id())
+                        ->orWhereHas('bookCheckout', function ($subQuery) {
+                            $subQuery->where('user_id', Auth::id());
+                        });
+                })
                 ->get()
-                ->transform(fn ($books) => [
-                    'id' => $books->id,
-                    'book_title' => $books->book_title,
-                    'book_author' => $books->book_author,
-                ]),
+                ->transform(function ($book) {
+                    $checkoutMarkers = Book::checkoutMarkers($book);
+                    $distanceTravelled = round(BookCheckout::calculateHaversineDistance($checkoutMarkers), 0);
+                    
+                    return [
+                        'uuid' => $book->uuid,
+                        'book_title' => $book->book_title,
+                        'book_author' => $book->book_author,
+                        'isOwner' => $book->user_id_owner == Auth::user()->id,
+                        'image' => $book->image,
+                        'book_checkout' => $book->bookCheckout,
+                        'distance_travelled' => $distanceTravelled,
+                    ];
+                }),
         ]);
     }
 
@@ -75,23 +80,70 @@ class BooksController extends Controller
         return Inertia::render('Books/Create');
     }
 
+
+    // call Google Books API and return all books matching the entered book_title
+    public function storeSearch(HttpRequest $request)
+    {
+        $baseURL = "https://www.googleapis.com/books/v1/volumes";
+        $queryParams = [
+            'q' => $request->input('book_title'),
+            'startIndex' => $request->input('startIndex', 0),
+            'maxResults' => $request->input('maxResults', 20),
+        ];
+
+        $url = $baseURL . '?' . http_build_query($queryParams);
+        $data = file_get_contents($url);
+        $response = json_decode($data, true);
+
+        $items = $response['items'] ?? [];
+        $filterItems = [];
+
+        foreach ($items as $item) {
+            $title = $item['volumeInfo']['title'] ?? null;
+            $description = $item['volumeInfo']['description'] ?? null;
+            $author = $item['volumeInfo']['authors'][0] ?? null;
+            $thumbnail = $item['volumeInfo']['imageLinks']['thumbnail'] ?? null;
+
+            $filterItems[] = [
+                'title' => $title,
+                'description' => $description,
+                'author' => $author,
+                'thumbnail' => $thumbnail
+            ];
+        }
+
+        return response()->json(['data' => $filterItems]);
+    }
+    
     /**
      * @throws \Exception
      */
-    public function store()
+    public function store(HttpRequest $request)
     {
-
         Request::validate([
             'book_title' => ['required'],
             'book_author' => ['required'],
         ]);
 
+        // if uploading an image from Google Books API then generate unique id and store the image data in 'public/images' directory
+        $googleBooksImage = $request->input('book_cover');
+        $uploadedImage = $request->file('book_cover');
+
+        if ( $googleBooksImage ) {
+            $imageData = file_get_contents($googleBooksImage);
+            $filename = uniqid() . '.jpg';
+            Storage::disk('public')->put('images/' . $filename, $imageData);
+            $image = 'images/' . $filename;
+        } else if ( $uploadedImage ) {
+            $image = $request->file('book_cover')->store('images', 'public');
+        }
+        
         $book = Book::create([
             'reference' => Book::generateUniqueReference(),
-            'code' => random_int(0001, 9999),
             'book_title' => Request::get('book_title'),
             'book_author' => Request::get('book_author'),
             'user_id_owner' => Auth::id(),
+            'book_cover' => $image ?? null,
         ]);
 
         // Check if the app is running on localhost
@@ -113,15 +165,16 @@ class BooksController extends Controller
             'city' => is_null($location) ? null : $location->cityName,
         ]);
 
-        return Redirect::route('books')->with('success', 'Book created.');
+        return Redirect::route('book.show', ['book' => $book->uuid])->with('success', 'New book created.');
+
     }
 
-
+    /**
+     * Show individual book.
+     *
+     */
     public function show(Book $book)
     {
-        $book->load('bookCheckout');
-//        $book->load('bookComments');
-
         $comments = $book->bookComments->map(function ($comment) {
             return [
                 'id' => $comment->id,
@@ -136,43 +189,14 @@ class BooksController extends Controller
         $isCheckedOut = Book::isBookCheckedOut($book);
         $isWithUser = Book::isBookWithUser($book);
         $lastWithUser = Book::wasBookLastWithUser($book);
-
-
-//        $markers = [
-//            ['position' => ['lat' => 37.7749, 'lng' => -122.4194], 'title' => 'Marker 1'],
-//            // Add more markers as needed
-//        ];
-
-
-        $markers = $book->bookCheckout->map(function ($book) {
-            return [
-                'lat' => floatval($book->lat),
-                'lng' => floatval($book->lng),
-            ];
-        })->toArray();
+        $checkoutMarkers = Book::checkoutMarkers($book);
+        $distanceTravelled = round(BookCheckout::calculateHaversineDistance($checkoutMarkers), 0);
 
         $firstBook = $book->bookCheckout->first();
-        if ($firstBook) {
-            $mapCenter = [
-                'lat' => floatval($firstBook->lat),
-                'lng' => floatval($firstBook->lng),
-            ];
-        } else {
-            $mapCenter = [
-                'lat' => 0,
-                'lng' => 0,
-            ];
-        }
-
-//        $sqlDistance = get_offers_near(40.7128, 34.0522, -74.0060, -118.2437);
-
-
-
-
-        $distanceTravelled = round(BookCheckout::calculateHaversineDistance($markers), 0);
-
-
-//        return Inertia::render('Books/Show', compact('book', 'isCheckedOut', 'isWithUser', '', '', '', ''));
+        $mapCenter = [
+            'lat' => floatval($firstBook ? $firstBook->lat : 0),
+            'lng' => floatval($firstBook ? $firstBook?->lng : 0),
+        ];
 
         return Inertia::render('Books/Show', [
             'book' => $book,
@@ -181,103 +205,24 @@ class BooksController extends Controller
             'isCheckedOut' => $isCheckedOut,
             'isWithUser' => $isWithUser,
             'lastWithUser' => $lastWithUser,
-            'markers' => $markers,
+            'markers' => $checkoutMarkers,
             'mapCenter' => $mapCenter,
             'distanceTravelled' => $distanceTravelled,
+            'loggedIn' => auth()->check(),
         ]);
-
-//        return Inertia::render('Books/Edit', $books);
-//        return Inertia::render('Books/Edit', [
-//            'books' => [
-//                'id' => $books->id,
-//                'book_title' => $books->book_title,
-//                'book_author' => $books->book_author,
-//                'user_id_owner' => $books->user_id_owner,
-//                'user_id' => Auth::id(),
-//                'checkouts' => $books->usersbooks,
-//            ],
-//            // info($books->book_title),
-//        ]);
     }
-
-
-
-
-
-
-
+    
 
     public function edit(Book $book)
     {
         return Inertia::render('Books/Edit', compact('book'));
-//        return Inertia::render('Books/Edit', $books);
-//        return Inertia::render('Books/Edit', [
-//            'books' => [
-//                'id' => $books->id,
-//                'book_title' => $books->book_title,
-//                'book_author' => $books->book_author,
-//                'user_id_owner' => $books->user_id_owner,
-//                'user_id' => Auth::id(),
-//                'checkouts' => $books->usersbooks,
-//            ],
-//            // info($books->book_title),
-//        ]);
     }
 
-
-    public function update(Book $id, HttpRequest $request)
+    public function checkout(Book $book, HttpRequest $request)
     {
+        // user must enter the correct reference number to checkout book.
+        if ($request->input('reference') == $book->reference) {
 
-
-        dd($request->all());
-        try {
-            // Log request data before dd
-            logger($request->all());
-
-            // Dump and die to inspect the data
-            dd($request->all());
-
-            // Rest of your update logic...
-        } catch (\Exception $e) {
-            // Log the exception
-            logger($e->getMessage());
-
-            // Return a response indicating failure
-            return response()->json(['error' => 'Internal Server Error'], 500);
-        }
-
-
-//        dd('testsssss');
-//dd($request->all());
-//        Request::validate([
-//            'book_title' => ['required'],
-//            'book_author' => ['required'],
-//            'image' => 'image|max:1024'
-//        ]);
-//dd($request->hasFile('book_cover'));
-//        $path = null;
-//        if ($request->hasFile('book_cover')) {
-//            // Delete the existing file if it exists
-//            if ($book->book_cover) {
-//                Storage::disk('public')->delete($book->book_cover);
-//            }
-//            // Store the file and get the path
-//            $path = $request->file('book_cover')->store('book_covers', 'public');
-//        }
-//
-//        $book->update([
-////            'book_cover' => $path,
-////            'book_title' => Request::get('book_title'),
-////            'book_author' => Request::get('book_author'),
-////            'book_genre' => Request::get('book_genre'),
-////            'description' => Request::get('description'),
-//        ]);
-//
-        return Redirect::back()->with('success', 'book updated.');
-    }
-
-    public function checkout(Book $book)
-    {
         // Check if the app is running on localhost
         if (app()->isLocal()) {
             $ip = '86.176.180.25';
@@ -292,37 +237,56 @@ class BooksController extends Controller
             'user_id' => Auth::user()->id,
             'book_id' => $book->id,
             'checkout_date' => Carbon::now(),
-            'lat' => is_null($location) ? null : $location->lat,
-            'lng' => is_null($location) ? null : $location->lon,
-            'city' => is_null($location) ? null : $location->city,
+            'lat' => is_null($location) ? null : $location->latitude,
+            'lng' => is_null($location) ? null : $location->longitude,
+            'city' => is_null($location) ? null : $location->cityName,
         ]);
 
-        return Redirect::back()->with('success', 'book checked out.');
+        return response()->json([
+            'data' => 'Book checked out',
+            'success' => true,
+        ]);
+
+        } else {
+
+            return response()->json([
+                'data' => 'Reference doesnt match.',
+                'success' => false,
+            ]);
+        }
     }
 
-
-
-    public function submitForm(\Illuminate\Http\Request $request, Book $book)
+    public function returnbook(Book $book)
     {
-//        dd($request->hasFile('book_cover'));
+        //maybe check current user is the last person to check out the book? also add confirmation modal to page
+        $book->bookCheckout()->update([
+            'checkin_date' => Carbon::now(),
+        ]);
+
+        return Redirect::back()->with('success', 'book returned. now pass to a friend or charity shop for the next reader to enjoy!');
+
+    }
+
+    public function update(\Illuminate\Http\Request $request, Book $book)
+    {
         $path = null;
         if ($request->hasFile('book_cover')) {
             // Delete the existing file if it exists
             if ($book->book_cover) {
                 Storage::disk('public')->delete($book->book_cover);
             }
+
             // Store the file and get the path
-//            $path = $request->file('book_cover')->store('book_covers', 'public');
-//            $path = Storage::put('covers', $request->file('book_cover'));
             $path = $request->file('book_cover')->store('images', 'public');
+        }
 
-//            $path = Storage::disk('local')->put('book_covers', $request->file('book_cover'));
-
-
+        $image = $path;
+        if ( !$path && $book->book_cover ) {
+            $image = $book->book_cover;
         }
 
         $book->update([
-            'book_cover' => $path,
+            'book_cover' => $image,
             'book_title' => Request::get('book_title'),
             'book_author' => Request::get('book_author'),
             'book_genre' => Request::get('book_genre'),
@@ -331,6 +295,50 @@ class BooksController extends Controller
 
         return Redirect::back()->with('success', 'book updated.');
     }
+
+    /**
+     * Redirect to book if search term matches a book reference.
+     *
+     * @return \Illuminate\Support\Facades\Redirect
+     */
+    public function search(HttpRequest $request)
+    {
+        $query = $request->input('query');
+
+        $book = Book::where('reference', $query)->get();
+
+        if ($book->isEmpty()) {
+            return Redirect::back()->with('failure', 'Book not found.');
+        } else {
+            return redirect()->route('book.show', ['book' => $book->first()]);
+        }
+    }
+
+    // public function update(Book $id, HttpRequest $request)
+    // {
+    //     dd('where is this being called');
+    //     // $image = $request->file('image');
+    //     // $imageName = time().'.'.$image->getClientOriginalExtension();
+
+        
+    //     try {
+    //         // Log request data before dd
+    //         logger($request->all());
+
+    //         // Dump and die to inspect the data
+    //         dd($request->all());
+
+    //         // Rest of your update logic...
+    //     } catch (\Exception $e) {
+    //         // Log the exception
+    //         logger($e->getMessage());
+
+    //         // Return a response indicating failure
+    //         return response()->json(['error' => 'Internal Server Error'], 500);
+    //     }
+
+    //     return Redirect::back()->with('success', 'book updated.');
+    // }
 
 }
 

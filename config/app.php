@@ -108,7 +108,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'en_GB',
 
     /*
     |--------------------------------------------------------------------------
@@ -181,8 +181,9 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        \Torann\GeoIP\GeoIPServiceProvider::class,
-
+        // \Torann\GeoIP\GeoIPServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+        
         /*
          * Package Service Providers...
          */
@@ -213,8 +214,8 @@ return [
 //        // 'ExampleClass' => App\Example\ExampleClass::class,
 //    ])->toArray(),
 
-    'aliases' => [
-        'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
-    ]
+    // 'aliases' => [
+    //     'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
+    // ]
 
 ];

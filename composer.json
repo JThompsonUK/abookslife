@@ -12,6 +12,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "spatie/laravel-permission": "*",
         "stevebauman/location": "^7.0",
         "tightenco/ziggy": "^1.5"
     },

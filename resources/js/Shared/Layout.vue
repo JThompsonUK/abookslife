@@ -19,7 +19,10 @@
 <!--                </p>-->
 <!--            </div>-->
 
-            <Nav/>
+
+            <Nav :username="username"></Nav>
+
+            
 <!--        </header>-->
 <!--    </section>-->
 
@@ -35,8 +38,13 @@
         <!--          <main-menu class="hidden md:block bg-indigo-800 flex-shrink-0 w-56 p-12 overflow-y-auto" />-->
 <!--        <div class="md:flex-1 px-4 py-8 md:p-12 md:overflow-y-auto" scroll-region>-->
         <div scroll-region>
-            Fix flash message - shared/Layout.vue
-<!--            <flash-messages />-->
+
+            <div v-if="$page.props.flash.success" class="alert alert-success">
+                {{ $page.props.flash.success }}
+            </div>
+            <div v-if="$page.props.flash.failure" class="alert alert-danger">
+                {{ $page.props.flash.failure }}
+            </div>
             <slot />
         </div>
     </div>

@@ -1,92 +1,46 @@
 <template>
-    <Head title="Dashboard" />
+    <div class="py-4">
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid">
+                <h1>Edit Profile</h1>
 
-    <BreezeAuthenticatedLayout>
-        <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Edit
-            </h2>
-        </template>
-
-        <div class="py-12">
-            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <form @submit.prevent="submit">
-                            <div>
-                                <label for="title">Title</label>
-                                <input
-                                    type="text"
-                                    v-model="form.title"
-                                    class="
-                                        w-full
-                                        px-4
-                                        py-2
-                                        mt-2
-                                        border
-                                        rounded-md
-                                        focus:outline-none
-                                        focus:ring-1
-                                        focus:ring-blue-600
-                                    "
-                                />
-                            </div>
-                            <div>
-                                <label for="title">Description</label>
-                                <textarea
-                                    name="description"
-                                    type="text"
-                                    v-model="form.description"
-                                    class="
-                                        w-full
-                                        px-4
-                                        py-2
-                                        mt-2
-                                        border
-                                        rounded-md
-                                        focus:outline-none
-                                        focus:ring-1
-                                        focus:ring-blue-600
-                                    "
-                                >
-                                </textarea>
-                            </div>
-
-                            <!-- submit -->
-                            <div class="flex items-center mt-4">
-                                <button
-                                    class="
-                                        px-6
-                                        py-2
-                                        text-white
-                                        bg-gray-900
-                                        rounded
-                                    "
-                                >
-                                    Save
-                                </button>
-                            </div>
-                        </form>
+                <form @submit.prevent="submitForm">
+                    <div class="form-row mb-3">
+                        <div class="col-md-8 p-0">
+                            <label for="name">Name:</label>
+                            <input v-model="formData.name" type="text" class="form-control" id="name" placeholder="Name" name="name" required />
+                        </div>
+                        <div class="col-md-4 pr-0">
+                            <label for="genre">Email:</label>
+                            <input v-model="formData.email" type="email" class="form-control" id="email" placeholder="Email" name="email" required />
+                        </div>
                     </div>
-                </div>
+                    
+                    <div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </BreezeAuthenticatedLayout>
+    </div>
 </template>
 
 <script>
 export default {
-    components: {
-    },
-    setup(props) {
-
-    },
     props: {
-
+        user: Object,
+    },
+    data() {
+        return {
+            formData: {
+                name: this.user.name,
+                email: this.user.email,
+            },
+        };
     },
     methods: {
-        submit() {
-            // this.form.put(route("users.update", this.post.id));
+        submitForm() {
+            this.$inertia.post(`/users/profile/update/${this.user.id}`, this.formData);
         },
     },
 };

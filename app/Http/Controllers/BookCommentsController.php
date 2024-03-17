@@ -21,7 +21,7 @@ class BookCommentsController extends Controller
             'comment' => Request::get('comment'),
         ]);
 
-        return Redirect::back()->with('success', 'book updated.');
+        return Redirect::back()->with('success', 'new comment added.');
     }
 
     public function update(Book $book, BookComments $bookComments)
