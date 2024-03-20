@@ -17735,6 +17735,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_Icons_plane_svg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Shared/Icons/plane.svg */ "./resources/js/Shared/Icons/plane.svg");
 /* harmony import */ var _Shared_Icons_world_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Shared/Icons/world.svg */ "./resources/js/Shared/Icons/world.svg");
 /* harmony import */ var _Shared_Icons_people_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Shared/Icons/people.svg */ "./resources/js/Shared/Icons/people.svg");
+/* harmony import */ var _Shared_Icons_bookmarkStar_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Shared/Icons/bookmarkStar.svg */ "./resources/js/Shared/Icons/bookmarkStar.svg");
+/* harmony import */ var _Shared_Icons_book_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Shared/Icons/book.svg */ "./resources/js/Shared/Icons/book.svg");
+
+
 
 
 
@@ -17747,7 +17751,9 @@ __webpack_require__.r(__webpack_exports__);
       listView: false,
       planeIcon: _Shared_Icons_plane_svg__WEBPACK_IMPORTED_MODULE_0__["default"],
       worldIcon: _Shared_Icons_world_svg__WEBPACK_IMPORTED_MODULE_1__["default"],
-      peopleIcon: _Shared_Icons_people_svg__WEBPACK_IMPORTED_MODULE_2__["default"]
+      peopleIcon: _Shared_Icons_people_svg__WEBPACK_IMPORTED_MODULE_2__["default"],
+      bookmarkStarIcon: _Shared_Icons_bookmarkStar_svg__WEBPACK_IMPORTED_MODULE_3__["default"],
+      bookIcon: _Shared_Icons_book_svg__WEBPACK_IMPORTED_MODULE_4__["default"]
     };
   },
   methods: {
@@ -17781,7 +17787,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     bookCheckouts: Object,
-    bookId: Number
+    bookId: Number,
+    modalWarning: String
   },
   methods: {
     store: function store() {
@@ -18030,17 +18037,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_Icons_plane_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Shared/Icons/plane.svg */ "./resources/js/Shared/Icons/plane.svg");
 /* harmony import */ var _Shared_Icons_world_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Shared/Icons/world.svg */ "./resources/js/Shared/Icons/world.svg");
 /* harmony import */ var _Shared_Icons_people_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Shared/Icons/people.svg */ "./resources/js/Shared/Icons/people.svg");
-/* harmony import */ var _Shared_Pagination__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../Shared/Pagination */ "./resources/js/Shared/Pagination.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _Shared_Icons_book_svg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../Shared/Icons/book.svg */ "./resources/js/Shared/Icons/book.svg");
+/* harmony import */ var _Shared_Icons_bookmarkStar_svg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../Shared/Icons/bookmarkStar.svg */ "./resources/js/Shared/Icons/bookmarkStar.svg");
+/* harmony import */ var _Shared_Icons_bookmarkHeart_svg__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../Shared/Icons/bookmarkHeart.svg */ "./resources/js/Shared/Icons/bookmarkHeart.svg");
+/* harmony import */ var _Shared_Pagination__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../Shared/Pagination */ "./resources/js/Shared/Pagination.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_12__);
 
 // import Layout from '@/Shared/Layout'
 
 
 // import Pagination from 'resources/Shared/Pagination.vue'
 // import SearchFilter from '@/Shared/SearchFilter'
+
+
+
 
 
 
@@ -18062,9 +18075,9 @@ __webpack_require__.r(__webpack_exports__);
 
     // import Icon from '@/Shared/Icon'
 
-    var search = (0,vue__WEBPACK_IMPORTED_MODULE_7__.ref)(props.filters.search);
-    (0,vue__WEBPACK_IMPORTED_MODULE_7__.watch)(search, lodash_debounce__WEBPACK_IMPORTED_MODULE_9___default()(function (value) {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_8__.Inertia.get('/books', {
+    var search = (0,vue__WEBPACK_IMPORTED_MODULE_10__.ref)(props.filters.search);
+    (0,vue__WEBPACK_IMPORTED_MODULE_10__.watch)(search, lodash_debounce__WEBPACK_IMPORTED_MODULE_12___default()(function (value) {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_11__.Inertia.get('/books', {
         search: value
       }, {
         preserveState: true,
@@ -18116,11 +18129,14 @@ __webpack_require__.r(__webpack_exports__);
       PlaneIcon: _Shared_Icons_plane_svg__WEBPACK_IMPORTED_MODULE_3__["default"],
       WorldIcon: _Shared_Icons_world_svg__WEBPACK_IMPORTED_MODULE_4__["default"],
       PeopleIcon: _Shared_Icons_people_svg__WEBPACK_IMPORTED_MODULE_5__["default"],
-      Pagination: _Shared_Pagination__WEBPACK_IMPORTED_MODULE_6__["default"],
-      ref: vue__WEBPACK_IMPORTED_MODULE_7__.ref,
-      watch: vue__WEBPACK_IMPORTED_MODULE_7__.watch,
-      Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_8__.Inertia,
-      debounce: (lodash_debounce__WEBPACK_IMPORTED_MODULE_9___default())
+      BookIcon: _Shared_Icons_book_svg__WEBPACK_IMPORTED_MODULE_6__["default"],
+      BookmarkStarIcon: _Shared_Icons_bookmarkStar_svg__WEBPACK_IMPORTED_MODULE_7__["default"],
+      BookmarkHeartIcon: _Shared_Icons_bookmarkHeart_svg__WEBPACK_IMPORTED_MODULE_8__["default"],
+      Pagination: _Shared_Pagination__WEBPACK_IMPORTED_MODULE_9__["default"],
+      ref: vue__WEBPACK_IMPORTED_MODULE_10__.ref,
+      watch: vue__WEBPACK_IMPORTED_MODULE_10__.watch,
+      Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_11__.Inertia,
+      debounce: (lodash_debounce__WEBPACK_IMPORTED_MODULE_12___default())
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -18199,6 +18215,7 @@ __webpack_require__.r(__webpack_exports__);
     isWithUser: Object,
     lastWithUser: Boolean,
     isOwner: Boolean,
+    userHasRead: Boolean,
     distanceTravelled: Number,
     loggedIn: Boolean,
     value: String,
@@ -18232,12 +18249,41 @@ __webpack_require__.r(__webpack_exports__);
       checkoutSuccess: '',
       checkoutFailure: '',
       modalTitle: 'Enter Reference',
-      modalDescription: '<div>QR Code: Print this off and stick it in your book, so people can easily access this page.</div><div>Reference: If you aren&#39;t able to print the QR code, simply write this reference in your book so other users can find this page.</div>'
+      modalDescription: ''
     };
+  },
+  computed: {
+    modalWarning: function modalWarning() {
+      if (this.isCheckedOut) {
+        if (this.isWithUser) {
+          return "This is checked out by you";
+        } else {
+          return "This is still checked out by another user, however, you can still checkout the book";
+        }
+      } else {
+        if (this.lastWithUser) {
+          return "This was last checked out by you! Pass this book to someone else to read.";
+        }
+      }
+    }
   },
   methods: {
     returnbook: function returnbook() {
-      this.$inertia.post(this.route('book.return', this.book.uuid));
+      var _this = this;
+      // this.$inertia.post(this.route('book.return', this.book.uuid))
+      axios__WEBPACK_IMPORTED_MODULE_10___default().post(route('book.return', this.book.uuid)).then(function (res) {
+        if (res.data.success) {
+          _this.checkoutSuccess = res.data.data;
+          _this.checkoutFailure = '';
+          _this.modalTitle = 'Congratulations!';
+          _this.modalDescription = 'You are the current owner of this book. Once you have read the book, click return book and pass it to someone else to read!';
+        } else {
+          _this.checkoutFailure = res.data.data;
+          _this.checkoutSuccess = '';
+        }
+      })["catch"](function (error) {
+        console.error('Error:', error);
+      });
     },
     infoModal: function infoModal() {
       var infoModal = new bootstrap.Modal(document.getElementById('infoModal'));
@@ -18247,19 +18293,23 @@ __webpack_require__.r(__webpack_exports__);
       var checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
       checkoutModal.show();
     },
+    returnModal: function returnModal() {
+      var returnModal = new bootstrap.Modal(document.getElementById('returnModal'));
+      returnModal.show();
+    },
     checkout: function checkout(referenceNumber) {
-      var _this = this;
+      var _this2 = this;
       axios__WEBPACK_IMPORTED_MODULE_10___default().post(route('book.checkout', this.book.uuid), {
         reference: referenceNumber
       }).then(function (res) {
         if (res.data.success) {
-          _this.checkoutSuccess = res.data.data;
-          _this.checkoutFailure = '';
-          _this.modalTitle = 'Congratulations!';
-          _this.modalDescription = 'You are the current owner of this book. Once you have read the book, click return book and pass it to someone else to read!';
+          _this2.checkoutSuccess = res.data.data;
+          _this2.checkoutFailure = '';
+          _this2.modalTitle = 'Congratulations!';
+          _this2.modalDescription = 'You are the current owner of this book. Once you have read the book, click return book and pass it to someone else to read!';
         } else {
-          _this.checkoutFailure = res.data.data;
-          _this.checkoutSuccess = '';
+          _this2.checkoutFailure = res.data.data;
+          _this2.checkoutSuccess = '';
         }
       })["catch"](function (error) {
         console.error('Error:', error);
@@ -18539,6 +18589,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     modalTitle: String,
     modalDescription: String,
+    modalWarning: String,
     checkoutSuccess: String,
     checkoutFailure: String,
     hasFormFields: Boolean
@@ -18759,20 +18810,42 @@ var _hoisted_7 = {
   "class": "row"
 };
 var _hoisted_8 = {
-  "class": "col-md-2 book-listing__cover d-flex"
+  "class": "col-md-2"
 };
 var _hoisted_9 = ["src"];
 var _hoisted_10 = {
-  "class": "col-md-10 book-listing__info"
+  "class": "col-md-8"
 };
 var _hoisted_11 = ["href"];
-var _hoisted_12 = ["src"];
-var _hoisted_13 = ["src"];
-var _hoisted_14 = {
+var _hoisted_12 = {
+  "class": "pb-2"
+};
+var _hoisted_13 = {
+  key: 0,
+  "class": "d-flex"
+};
+var _hoisted_14 = ["src"];
+var _hoisted_15 = {
+  "class": "d-flex"
+};
+var _hoisted_16 = ["src"];
+var _hoisted_17 = {
+  "class": "d-flex"
+};
+var _hoisted_18 = ["src"];
+var _hoisted_19 = {
   key: 0
 };
-var _hoisted_15 = ["src"];
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */);
+var _hoisted_20 = {
+  "class": "d-flex"
+};
+var _hoisted_21 = ["src"];
+var _hoisted_22 = {
+  key: 0,
+  "class": "col-md-2 book-listing__info"
+};
+var _hoisted_23 = ["src"];
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
@@ -18780,12 +18853,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
     title: "Bookshelf"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn btn-info btn-sm",
+    "class": "btn btn-info mb-2",
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.toggleView && $options.toggleView.apply($options, arguments);
     })
   }, [$data.listView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_2, " Bookshelf View ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_3, " List View "))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.books, function (book) {
-    var _book$book_genre;
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: book.id
     }, [$data.listView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_title), 1 /* TEXT */)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -18797,7 +18869,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         maxHeight: '240px',
         maxWidth: '170px'
       })
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [book.image ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+      key: 0,
       src: book.image,
       alt: "Book Cover Image",
       style: {
@@ -18805,19 +18878,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "padding": "20px 25px 20px 20px",
         "height": "auto"
       }
-    }, null, 8 /* PROPS */, _hoisted_9)], 4 /* STYLE */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    }, null, 8 /* PROPS */, _hoisted_9)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 4 /* STYLE */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: _ctx.route('book.show', book.uuid)
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_title), 1 /* TEXT */)], 8 /* PROPS */, _hoisted_11), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_author), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_book$book_genre = book.book_genre) !== null && _book$book_genre !== void 0 ? _book$book_genre : 'genre'), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.isOwner ? 'Book Owner' : 'Read but not owner'), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_title), 1 /* TEXT */)], 8 /* PROPS */, _hoisted_11), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_author), 1 /* TEXT */), book.book_genre ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      "class": "book-listing__info--icon",
+      src: _this.bookIcon
+    }, null, 8 /* PROPS */, _hoisted_14), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_genre), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       "class": "book-listing__info--icon",
       src: _this.planeIcon
-    }, null, 8 /* PROPS */, _hoisted_12), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.distance_travelled) + " miles ", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, null, 8 /* PROPS */, _hoisted_16), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.distance_travelled) + " miles ", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       "class": "book-listing__info--icon",
       src: _this.worldIcon
-    }, null, 8 /* PROPS */, _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_checkout[0] ? book.book_checkout[0]['city'] : null), 1 /* TEXT */), book.book_checkout.length > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_14, " -> " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_checkout[book.book_checkout.length - 1] ? book.book_checkout[book.book_checkout.length - 1]['city'] : null), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, null, 8 /* PROPS */, _hoisted_18), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_checkout[0] ? book.book_checkout[0]['city'] : null), 1 /* TEXT */), book.book_checkout.length > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_19, " -> " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_checkout[book.book_checkout.length - 1] ? book.book_checkout[book.book_checkout.length - 1]['city'] : null), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       "class": "book-listing__info--icon",
       src: _this.peopleIcon,
       alt: "people viewed"
-    }, null, 8 /* PROPS */, _hoisted_15), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_checkout.length), 1 /* TEXT */)]), _hoisted_16])]))]);
+    }, null, 8 /* PROPS */, _hoisted_21), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_checkout.length), 1 /* TEXT */)])]), book.isOwner ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      "class": "book-listing__info--icon",
+      src: _this.bookmarkStarIcon,
+      alt: "You are this books owner"
+    }, null, 8 /* PROPS */, _hoisted_23)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])), _hoisted_24]);
   }), 128 /* KEYED_FRAGMENT */))])])])]);
 }
 
@@ -18847,12 +18927,19 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   "class": "py-2 d-flex justify-content-center"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Checkout Card")], -1 /* HOISTED */);
 var _hoisted_3 = {
+  key: 0,
+  "class": "text-danger"
+};
+var _hoisted_4 = {
+  "class": "text-center"
+};
+var _hoisted_5 = {
   "class": "table",
   style: {
     "width": "100%"
   }
 };
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   scope: "col"
 }, "Checkout date"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   scope: "col"
@@ -18863,7 +18950,7 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 }, "Location")])], -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_3, [_hoisted_4, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.bookCheckouts, function (checkout) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, $props.modalWarning ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.modalWarning), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_5, [_hoisted_6, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.bookCheckouts, function (checkout) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tbody", {
       key: checkout.id,
       style: {
@@ -19294,41 +19381,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex justify-between mb-6"
+  "class": "py-4"
 };
 var _hoisted_2 = {
-  "class": "flex items-center"
+  "class": "d-flex w-50 mb-2"
 };
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Add Book");
 var _hoisted_4 = {
-  "class": "py-4"
-};
-var _hoisted_5 = {
   "class": "p-5 mb-4 bg-light rounded-3"
 };
+var _hoisted_5 = {
+  "class": "container-fluid"
+};
 var _hoisted_6 = {
+  "class": "row"
+};
+var _hoisted_7 = {
   "class": "col-md-2"
 };
-var _hoisted_7 = ["src"];
-var _hoisted_8 = {
-  "class": "col-md-10"
+var _hoisted_8 = ["src"];
+var _hoisted_9 = {
+  "class": "col-md-8"
 };
-var _hoisted_9 = ["href"];
-var _hoisted_10 = ["src"];
-var _hoisted_11 = ["src"];
-var _hoisted_12 = {
-  key: 0
+var _hoisted_10 = ["href"];
+var _hoisted_11 = {
+  key: 0,
+  "class": "d-flex"
 };
-var _hoisted_13 = ["src"];
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */);
+var _hoisted_12 = ["src"];
+var _hoisted_13 = {
+  "class": "d-flex"
+};
+var _hoisted_14 = ["src"];
 var _hoisted_15 = {
+  "class": "d-flex"
+};
+var _hoisted_16 = ["src"];
+var _hoisted_17 = {
   key: 0
 };
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
+var _hoisted_18 = {
+  "class": "d-flex"
+};
+var _hoisted_19 = ["src"];
+var _hoisted_20 = {
+  "class": "col-md-2 book-listing__info"
+};
+var _hoisted_21 = ["src"];
+var _hoisted_22 = ["src"];
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */);
+var _hoisted_24 = {
+  key: 0
+};
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
   "class": "border-t px-6 py-4",
   colspan: "4"
 }, "No books found.", -1 /* HOISTED */);
-var _hoisted_17 = [_hoisted_16];
+var _hoisted_26 = [_hoisted_25];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
   var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
@@ -19336,25 +19445,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     title: "Books"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     href: _ctx.route('book.create'),
-    "class": "text-blue-500 text-sm ml-3"
+    "class": "btn btn-info w-20 mr-2",
+    style: {
+      "width": "150px"
+    }
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_3];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, 8 /* PROPS */, ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.search = $event;
     }),
     type: "text",
     placeholder: "Search...",
-    "class": "border px-2 rounded-lg"
+    "class": "form-control w-30"
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.search]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.books.data, function (book) {
-    var _book$book_genre;
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      "class": "container-fluid row",
       key: book.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)({
         backgroundImage: 'url(/images/book-layout-front.svg)',
         width: '100%',
@@ -19362,30 +19472,44 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         backgroundRepeat: 'no-repeat',
         maxHeight: '240px'
       })
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [book.image ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+      key: 0,
       src: book.image,
       alt: "Book Cover Image",
       style: {
         "width": "100%",
         "padding": "20px 25px 20px 20px"
       }
-    }, null, 8 /* PROPS */, _hoisted_7)], 4 /* STYLE */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    }, null, 8 /* PROPS */, _hoisted_8)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 4 /* STYLE */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: _ctx.route('book.show', book.uuid)
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_title), 1 /* TEXT */)], 8 /* PROPS */, _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_author), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_book$book_genre = book.book_genre) !== null && _book$book_genre !== void 0 ? _book$book_genre : 'genre'), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_title), 1 /* TEXT */)], 8 /* PROPS */, _hoisted_10), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_author), 1 /* TEXT */), book.book_genre ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      "class": "book-listing__info--icon",
+      src: $setup.BookIcon
+    }, null, 8 /* PROPS */, _hoisted_12), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_genre), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       "class": "book-listing__info--icon",
       src: $setup.PlaneIcon
-    }, null, 8 /* PROPS */, _hoisted_10), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.distance_travelled) + " miles ", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, null, 8 /* PROPS */, _hoisted_14), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.distance_travelled) + " miles ", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       "class": "book-listing__info--icon",
       src: $setup.WorldIcon
-    }, null, 8 /* PROPS */, _hoisted_11), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_checkout[0] ? book.book_checkout[0]['city'] : null), 1 /* TEXT */), book.book_checkout.length > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_12, " -> " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_checkout[book.book_checkout.length - 1] ? book.book_checkout[book.book_checkout.length - 1]['city'] : null), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, null, 8 /* PROPS */, _hoisted_16), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_checkout[0] ? book.book_checkout[0]['city'] : null), 1 /* TEXT */), book.book_checkout.length > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_17, " -> " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_checkout[book.book_checkout.length - 1] ? book.book_checkout[book.book_checkout.length - 1]['city'] : null), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       "class": "book-listing__info--icon",
       src: $setup.PeopleIcon,
       alt: "people viewed"
-    }, null, 8 /* PROPS */, _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_checkout.length), 1 /* TEXT */)]), _hoisted_14])]);
-  }), 128 /* KEYED_FRAGMENT */))])]), $props.books.length === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, _hoisted_17)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Pagination"], {
+    }, null, 8 /* PROPS */, _hoisted_19), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.book_checkout.length), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [book.isOwner ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+      key: 0,
+      "class": "book-listing__info--icon",
+      src: $setup.BookmarkStarIcon,
+      alt: "You are this books owner"
+    }, null, 8 /* PROPS */, _hoisted_21)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), book.userHasRead ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+      key: 1,
+      "class": "book-listing__info--icon",
+      src: $setup.BookmarkHeartIcon,
+      alt: "You have read this book"
+    }, null, 8 /* PROPS */, _hoisted_22)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), _hoisted_23]);
+  }), 128 /* KEYED_FRAGMENT */))])]), $props.books.length === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, _hoisted_26)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Pagination"], {
     links: $props.books.links,
     "class": "mt-6"
-  }, null, 8 /* PROPS */, ["links"])]);
+  }, null, 8 /* PROPS */, ["links"])])]);
 }
 
 /***/ }),
@@ -19402,9 +19526,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _Shared_Icons_plane_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Shared/Icons/plane.svg */ "./resources/js/Shared/Icons/plane.svg");
-/* harmony import */ var _Shared_Icons_world_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Shared/Icons/world.svg */ "./resources/js/Shared/Icons/world.svg");
-/* harmony import */ var _Shared_Icons_people_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Shared/Icons/people.svg */ "./resources/js/Shared/Icons/people.svg");
+/* harmony import */ var _Shared_Icons_bookmarkStar_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Shared/Icons/bookmarkStar.svg */ "./resources/js/Shared/Icons/bookmarkStar.svg");
+/* harmony import */ var _Shared_Icons_bookmarkHeart_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Shared/Icons/bookmarkHeart.svg */ "./resources/js/Shared/Icons/bookmarkHeart.svg");
+/* harmony import */ var _Shared_Icons_book_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Shared/Icons/book.svg */ "./resources/js/Shared/Icons/book.svg");
+/* harmony import */ var _Shared_Icons_plane_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Shared/Icons/plane.svg */ "./resources/js/Shared/Icons/plane.svg");
+/* harmony import */ var _Shared_Icons_world_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Shared/Icons/world.svg */ "./resources/js/Shared/Icons/world.svg");
+/* harmony import */ var _Shared_Icons_people_svg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../Shared/Icons/people.svg */ "./resources/js/Shared/Icons/people.svg");
+/* harmony import */ var _Shared_Icons_checkoutReturn_svg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../Shared/Icons/checkoutReturn.svg */ "./resources/js/Shared/Icons/checkoutReturn.svg");
+/* harmony import */ var _Shared_Icons_checkout_svg__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../Shared/Icons/checkout.svg */ "./resources/js/Shared/Icons/checkout.svg");
+/* harmony import */ var _Shared_Icons_edit_svg__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../Shared/Icons/edit.svg */ "./resources/js/Shared/Icons/edit.svg");
+/* harmony import */ var _Shared_Icons_info_svg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../Shared/Icons/info.svg */ "./resources/js/Shared/Icons/info.svg");
+
+
+
+
+
+
+
 
 
 
@@ -19416,104 +19554,147 @@ var _hoisted_2 = {
   "class": "p-5 mb-4 bg-light rounded-3"
 };
 var _hoisted_3 = {
-  "class": "container-fluid row"
+  "class": "container-fluid"
 };
 var _hoisted_4 = {
+  "class": "row"
+};
+var _hoisted_5 = {
   "class": "col-md-2"
 };
-var _hoisted_5 = ["src"];
-var _hoisted_6 = {
+var _hoisted_6 = ["src"];
+var _hoisted_7 = {
   "class": "col-md-8"
 };
-var _hoisted_7 = {
-  key: 0
+var _hoisted_8 = {
+  "class": "d-flex justify-content-between"
 };
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  "class": "book-item__right--icon",
-  src: _Shared_Icons_plane_svg__WEBPACK_IMPORTED_MODULE_1__["default"]
-}, null, -1 /* HOISTED */);
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  "class": "book-item__right--icon",
-  src: _Shared_Icons_world_svg__WEBPACK_IMPORTED_MODULE_2__["default"]
-}, null, -1 /* HOISTED */);
+var _hoisted_9 = {
+  key: 0,
+  "class": "book-listing__info--icon mr-2",
+  src: _Shared_Icons_bookmarkStar_svg__WEBPACK_IMPORTED_MODULE_1__["default"],
+  alt: "You are this books owner"
+};
 var _hoisted_10 = {
+  key: 1,
+  "class": "book-listing__info--icon",
+  src: _Shared_Icons_bookmarkHeart_svg__WEBPACK_IMPORTED_MODULE_2__["default"],
+  alt: "You have read this book"
+};
+var _hoisted_11 = {
+  "class": "pb-2"
+};
+var _hoisted_12 = {
+  key: 0,
+  "class": "d-flex"
+};
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  "class": "book-listing__info--icon",
+  src: _Shared_Icons_book_svg__WEBPACK_IMPORTED_MODULE_3__["default"]
+}, null, -1 /* HOISTED */);
+var _hoisted_14 = {
+  "class": "d-flex"
+};
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  "class": "book-item__right--icon",
+  src: _Shared_Icons_plane_svg__WEBPACK_IMPORTED_MODULE_4__["default"]
+}, null, -1 /* HOISTED */);
+var _hoisted_16 = {
+  "class": "d-flex"
+};
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  "class": "book-item__right--icon",
+  src: _Shared_Icons_world_svg__WEBPACK_IMPORTED_MODULE_5__["default"]
+}, null, -1 /* HOISTED */);
+var _hoisted_18 = {
   key: 0
 };
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+var _hoisted_19 = {
+  "class": "d-flex"
+};
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
   "class": "book-item__right--icon",
-  src: _Shared_Icons_people_svg__WEBPACK_IMPORTED_MODULE_3__["default"],
+  src: _Shared_Icons_people_svg__WEBPACK_IMPORTED_MODULE_6__["default"],
   alt: "people viewed"
 }, null, -1 /* HOISTED */);
-var _hoisted_12 = {
-  key: 1,
-  "class": "text-danger"
-};
-var _hoisted_13 = ["href"];
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" to checkout this Book ");
-var _hoisted_15 = {
-  key: 2,
-  "class": "text-danger"
-};
-var _hoisted_16 = {
-  key: 0
-};
-var _hoisted_17 = {
-  key: 0
-};
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" This is checked out by you ");
-var _hoisted_19 = {
-  key: 1
-};
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" This is still checked out by another user, however, you can still checkout the book ");
 var _hoisted_21 = {
-  key: 1
+  "class": "d-flex py-2"
 };
 var _hoisted_22 = {
-  key: 0
-};
-var _hoisted_23 = {
-  key: 1
-};
-var _hoisted_24 = {
-  key: 0,
   "class": "col-md-2 text-right"
 };
-var _hoisted_25 = ["href"];
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "btn btn-primary mb-3"
-}, "Edit", -1 /* HOISTED */);
-var _hoisted_27 = [_hoisted_26];
+var _hoisted_23 = {
+  key: 0,
+  "class": "text-center p-3",
+  style: {
+    "border": "1px dashed #000"
+  }
+};
+var _hoisted_24 = {
+  "class": "mt-2 d-flex justify-content-end"
+};
+var _hoisted_25 = {
+  key: 0,
+  "class": "mr-1"
+};
+var _hoisted_26 = {
+  key: 0
+};
+var _hoisted_27 = {
+  key: 1
+};
 var _hoisted_28 = {
+  "class": "mr-1"
+};
+var _hoisted_29 = ["href"];
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: _Shared_Icons_edit_svg__WEBPACK_IMPORTED_MODULE_9__["default"],
+  alt: "edit",
+  "class": "custom-icon"
+}, null, -1 /* HOISTED */);
+var _hoisted_31 = [_hoisted_30];
+var _hoisted_32 = {
+  key: 1,
+  "class": "text-danger text-left"
+};
+var _hoisted_33 = ["href"];
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" to checkout this Book ");
+var _hoisted_35 = {
   id: "infoModal",
   "class": "modal fade",
   role: "dialog"
 };
-var _hoisted_29 = {
+var _hoisted_36 = {
   id: "checkoutModal",
   "class": "modal fade",
   role: "dialog"
 };
-var _hoisted_30 = {
+var _hoisted_37 = {
+  id: "returnModal",
+  "class": "modal fade",
+  role: "dialog"
+};
+var _hoisted_38 = {
   "class": "row align-items-md-stretch"
 };
-var _hoisted_31 = {
+var _hoisted_39 = {
   "class": "col-md-6"
 };
-var _hoisted_32 = {
+var _hoisted_40 = {
   "class": "h-100"
 };
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "col-md-6"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "h-100 p-5 bg-light border rounded-3"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Books Journey"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Google map with pins from checkout card here"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <GoogleMap\n                           api-key=\"AIzaSyCYhCxQiuTzX8x1FtUJX9ngVSkzaavqY3Q\"\n                           style=\"width: 100%; height: 500px\"\n                           :center=\"center\"\n                           :zoom=\"zoom\"\n                       >\n                           <MarkerCluster>\n                               <Marker v-for=\"(location, i) in locations\" :options=\"{ position: location }\" :key=\"i\" />\n                           </MarkerCluster>\n                       </GoogleMap> ")])], -1 /* HOISTED */);
-var _hoisted_34 = {
+var _hoisted_42 = {
   "class": "row book-item__comments"
 };
-var _hoisted_35 = {
+var _hoisted_43 = {
   "class": "col-md-12 pb-5"
 };
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Comments:", -1 /* HOISTED */);
+var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Comments:", -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
@@ -19523,7 +19704,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Comments = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Comments");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
     title: "Book Item"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)({
       backgroundImage: 'url(/images/book-layout-front.svg)',
       width: '100%',
@@ -19531,59 +19712,79 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       backgroundRepeat: 'no-repeat',
       maxHeight: '240px'
     })
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  }, [$props.book.image ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+    key: 0,
     src: $props.book.image,
     alt: "Book Cover Image",
     style: {
       "width": "100%",
       "padding": "20px 25px 20px 20px"
     }
-  }, null, 8 /* PROPS */, _hoisted_5)], 4 /* STYLE */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.book_title), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.book_author), 1 /* TEXT */), $props.book.book_genre ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_7, "Genre: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.book_genre), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.distanceTravelled) + " miles ", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.book_checkout[0] ? $props.book.book_checkout[0]['city'] : null), 1 /* TEXT */), $props.book.book_checkout.length > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_10, " -> " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.book_checkout[$props.book.book_checkout.length - 1] ? $props.book.book_checkout[$props.book.book_checkout.length - 1]['city'] : null), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.book_checkout.length), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"book-item__right&#45;&#45;rating\">\n                            <svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" class=\"h-4 w-4 fill-current text-yellow-500\">\n                                <path d=\"M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z\"></path></svg><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" class=\"h-4 w-4 fill-current text-yellow-500\"><path d=\"M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z\"></path></svg><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" class=\"h-4 w-4 fill-current text-yellow-500\"><path d=\"M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z\"></path></svg><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" class=\"h-4 w-4 fill-current text-yellow-500\"><path d=\"M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z\"></path></svg><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" class=\"h-4 w-4 fill-current text-gray-400\"><path d=\"M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z\"></path>\n                            </svg>\n                            <span class=\"ml-2\">\n                                34 ratings\n                            </span>\n                        </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.description), 1 /* TEXT */), !$props.loggedIn ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    href: "/login?redirect=/books/".concat($props.book.uuid)
-  }, "Login/Register", 8 /* PROPS */, _hoisted_13), _hoisted_14])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [this.isCheckedOut ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [this.isWithUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn btn-primary",
-    type: "submit",
-    onClick: _cache[0] || (_cache[0] = function () {
-      return $options.returnbook && $options.returnbook.apply($options, arguments);
-    })
-  }, "Return book")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[1] || (_cache[1] = function () {
-      return $options.checkoutModal && $options.checkoutModal.apply($options, arguments);
-    }),
-    "class": "btn btn-primary"
-  }, "Checkout book")]))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_21, [this.lastWithUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, " This was last checked out by you! pass this book to someone else for a read. ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[2] || (_cache[2] = function () {
-      return $options.checkoutModal && $options.checkoutModal.apply($options, arguments);
-    }),
-    "class": "btn btn-primary"
-  }, "Checkout book")]))]))]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" QR CODE AND REFERENCE "), $props.isOwner || $props.isWithUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, [$props.isOwner ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
-    key: 0,
-    href: _ctx.route('book.edit', $props.book.uuid)
-  }, _hoisted_27, 8 /* PROPS */, _hoisted_25)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_qrcode_vue, {
+  }, null, 8 /* PROPS */, _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 4 /* STYLE */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.book_title), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [$props.isOwner ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", _hoisted_9)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.userHasRead ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", _hoisted_10)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.book_author), 1 /* TEXT */), $props.book.book_genre ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.book_genre), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.distanceTravelled) + " miles ", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.book_checkout[0] ? $props.book.book_checkout[0]['city'] : null), 1 /* TEXT */), $props.book.book_checkout.length > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_18, " -> " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.book_checkout[$props.book.book_checkout.length - 1] ? $props.book.book_checkout[$props.book.book_checkout.length - 1]['city'] : null), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.book_checkout.length), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"book-item__right&#45;&#45;rating\">\n                                <svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" class=\"h-4 w-4 fill-current text-yellow-500\">\n                                    <path d=\"M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z\"></path></svg><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" class=\"h-4 w-4 fill-current text-yellow-500\"><path d=\"M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z\"></path></svg><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" class=\"h-4 w-4 fill-current text-yellow-500\"><path d=\"M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z\"></path></svg><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" class=\"h-4 w-4 fill-current text-yellow-500\"><path d=\"M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z\"></path></svg><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" class=\"h-4 w-4 fill-current text-gray-400\"><path d=\"M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z\"></path>\n                                </svg>\n                                <span class=\"ml-2\">\n                                    34 ratings\n                                </span>\n                            </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.description), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" QR CODE AND REFERENCE "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" show qr code and reference if current user is book owner is checked out to "), $props.isOwner || $props.isWithUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_qrcode_vue, {
     value: $props.value,
     size: $props.size,
     background: "#FFF",
     foreground: "#333",
     level: "L"
-  }, null, 8 /* PROPS */, ["value", "size"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, " Reference: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.reference), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, null, 8 /* PROPS */, ["value", "size"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Reference: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.book.reference), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" if book is with current user "), this.isCheckedOut ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, [this.isWithUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: _Shared_Icons_checkoutReturn_svg__WEBPACK_IMPORTED_MODULE_7__["default"],
+    alt: "return",
+    "class": "custom-icon",
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.returnModal && $options.returnModal.apply($options, arguments);
+    })
+  })])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: _Shared_Icons_checkout_svg__WEBPACK_IMPORTED_MODULE_8__["default"],
+    alt: "checkout book",
+    "class": "custom-icon",
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.checkoutModal && $options.checkoutModal.apply($options, arguments);
+    })
+  })]))])) : !this.lastWithUser && $props.loggedIn ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    key: 1
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" if user is logged in an wasnt the last person to check out book "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: _Shared_Icons_checkout_svg__WEBPACK_IMPORTED_MODULE_8__["default"],
+    alt: "checkout book",
+    "class": "custom-icon",
+    onClick: _cache[2] || (_cache[2] = function () {
+      return $options.checkoutModal && $options.checkoutModal.apply($options, arguments);
+    })
+  })])], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" if current user is original owner of book "), $props.isOwner ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+    key: 2,
+    href: _ctx.route('book.edit', $props.book.uuid),
+    "class": "mr-1"
+  }, _hoisted_31, 8 /* PROPS */, _hoisted_29)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" show info modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: _Shared_Icons_info_svg__WEBPACK_IMPORTED_MODULE_10__["default"],
+    "class": "custom-icon",
+    alt: "information",
     onClick: _cache[3] || (_cache[3] = function () {
       return $options.infoModal && $options.infoModal.apply($options, arguments);
-    }),
-    "class": "btn btn-primary"
-  }, " ? ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" INFO MODAL "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
+    })
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" CHECKOUT "), !$props.loggedIn ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: "/login?redirect=/books/".concat($props.book.uuid)
+  }, "Login/Register", 8 /* PROPS */, _hoisted_33), _hoisted_34])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-else class=\"text-danger text-left mt-2\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"this.isCheckedOut\">\n                                    <div v-if=\"this.isWithUser\">\n                                        This is checked out by you\n                                    </div>\n                                    <div v-else>\n                                        This is still checked out by another user, however, you can still checkout the book\n                                    </div>\n                                </div>\n                                <div v-else>\n                                    <div v-if=\"this.lastWithUser\">\n                                        This was last checked out by you! pass this book to someone else to read.\n                                    </div>\n                                    <div v-else>\n                                    </div>\n                                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" </div> ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" INFO MODAL "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
     modalTitle: "Info",
-    modalDescription: $data.modalDescription
-  }, null, 8 /* PROPS */, ["modalDescription"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" BOOK CHECKOUT MODAL "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
+    modalDescription: $data.modalDescription,
+    modalWarning: $options.modalWarning
+  }, null, 8 /* PROPS */, ["modalDescription", "modalWarning"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" BOOK CHECKOUT MODAL "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
     checkoutSuccess: $data.checkoutSuccess,
     checkoutFailure: $data.checkoutFailure,
     modalTitle: $data.modalTitle,
     modalDescription: "This is the reference number found next to the QR code or hand-written in the book. This confirms that you are in possession of the book.",
     hasFormFields: true,
     onChildClick: $options.checkout
-  }, null, 8 /* PROPS */, ["checkoutSuccess", "checkoutFailure", "modalTitle", "onChildClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" BOOK CHECKOUTS "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Checkouts, {
+  }, null, 8 /* PROPS */, ["checkoutSuccess", "checkoutFailure", "modalTitle", "onChildClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" BOOK RETURN MODAL "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
+    checkoutSuccess: $data.checkoutSuccess,
+    checkoutFailure: $data.checkoutFailure,
+    modalTitle: "Return Book",
+    modalDescription: "Are you sure you want to return the book?",
+    hasFormFields: true,
+    onChildClick: $options.returnbook
+  }, null, 8 /* PROPS */, ["checkoutSuccess", "checkoutFailure", "onChildClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" BOOK CHECKOUTS "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Checkouts, {
     bookCheckouts: $props.book.book_checkout,
-    "book-id": $props.book.id
-  }, null, 8 /* PROPS */, ["bookCheckouts", "book-id"])])]), _hoisted_33])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" BOOK COMMENTS "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [_hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Comments, {
+    "book-id": $props.book.id,
+    modalWarning: $options.modalWarning
+  }, null, 8 /* PROPS */, ["bookCheckouts", "book-id", "modalWarning"])])]), _hoisted_41])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" BOOK COMMENTS "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [_hoisted_44, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Comments, {
     comments: $props.comments,
     "book-uuid": $props.book.uuid,
     loggedIn: $props.loggedIn
@@ -20199,9 +20400,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Shared_Icons_close_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Shared/Icons/close.svg */ "./resources/js/Shared/Icons/close.svg");
+/* harmony import */ var _Shared_Icons_bookmarkStar_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Shared/Icons/bookmarkStar.svg */ "./resources/js/Shared/Icons/bookmarkStar.svg");
+/* harmony import */ var _Shared_Icons_bookmarkHeart_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Shared/Icons/bookmarkHeart.svg */ "./resources/js/Shared/Icons/bookmarkHeart.svg");
+/* harmony import */ var _Shared_Icons_qr_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Shared/Icons/qr.svg */ "./resources/js/Shared/Icons/qr.svg");
+/* harmony import */ var _Shared_Icons_checkout_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Shared/Icons/checkout.svg */ "./resources/js/Shared/Icons/checkout.svg");
+/* harmony import */ var _Shared_Icons_checkoutReturn_svg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Shared/Icons/checkoutReturn.svg */ "./resources/js/Shared/Icons/checkoutReturn.svg");
+
+
+
+
+
+
 
 var _hoisted_1 = {
-  "class": "modal-dialog modal-dialog-centered"
+  "class": "modal-dialog modal-dialog-centered",
+  style: {
+    "max-width": "50%"
+  }
 };
 var _hoisted_2 = {
   "class": "modal-content"
@@ -20212,61 +20428,81 @@ var _hoisted_3 = {
 var _hoisted_4 = {
   "class": "modal-title"
 };
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   type: "button",
-  "class": "btn-close",
   "data-bs-dismiss": "modal",
   "aria-label": "Close"
-}, null, -1 /* HOISTED */);
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  "class": "book-item__right--icon",
+  src: _Shared_Icons_close_svg__WEBPACK_IMPORTED_MODULE_1__["default"],
+  alt: "close"
+})], -1 /* HOISTED */);
 var _hoisted_6 = {
-  "class": "modal-body"
+  "class": "modal-body py-2"
 };
 var _hoisted_7 = {
-  key: 0
+  key: 0,
+  "class": "text-danger"
 };
 var _hoisted_8 = {
+  "class": "py-2"
+};
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */);
+var _hoisted_10 = {
   key: 1
 };
-var _hoisted_9 = ["innerHTML"];
-var _hoisted_10 = {
+var _hoisted_11 = {
   key: 2
 };
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "referenceNumber"
-}, "Reference:", -1 /* HOISTED */);
 var _hoisted_12 = {
-  "class": "modal-footer"
+  "class": "text-danger"
 };
 var _hoisted_13 = {
+  key: 3
+};
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<h6 class=\"mb-2\"> Key: </h6><div class=\"row\"><div class=\"col-md-1 mb-3\"><img class=\"book-listing__info--icon mr-2\" src=\"" + _Shared_Icons_bookmarkStar_svg__WEBPACK_IMPORTED_MODULE_2__["default"] + "\" alt=\"You are this books owner\"></div><div class=\"col-md-11 mb-3\"> You are the owner of this book and have the ability to edit it. </div><div class=\"col-md-1 mb-3\"><img class=\"book-listing__info--icon\" src=\"" + _Shared_Icons_bookmarkHeart_svg__WEBPACK_IMPORTED_MODULE_3__["default"] + "\" alt=\"You have read this book\"></div><div class=\"col-md-11 mb-3\"> You have read this book, but someone else was the original owner. </div><div class=\"col-md-1 mb-3\"><img class=\"book-listing__info--icon\" src=\"" + _Shared_Icons_qr_svg__WEBPACK_IMPORTED_MODULE_4__["default"] + "\" alt=\"Add QR code to your book\"></div><div class=\"col-md-11 mb-3\"> Print off the QR code and stick it in your book, so people can easily access this page. If you aren&#39;t able to print the QR code, simply write the reference in your book so other users can find this page. </div><div class=\"col-md-1 mb-3\"><img class=\"book-listing__info--icon\" src=\"" + _Shared_Icons_checkout_svg__WEBPACK_IMPORTED_MODULE_5__["default"] + "\" alt=\"Checkout this book\"></div><div class=\"col-md-11 mb-3\"> If you checkout this book, it will update the checkout card with the date and location. Much like a library card, you can keep a record of everyone who has read your book. </div><div class=\"col-md-1 mb-3\"><img class=\"book-listing__info--icon\" src=\"" + _Shared_Icons_checkoutReturn_svg__WEBPACK_IMPORTED_MODULE_6__["default"] + "\" alt=\"Checkin this book\"></div><div class=\"col-md-11 mb-3\"> Once you have finished reading the book, check it back in and hand it to someone else to read. </div></div>", 2);
+var _hoisted_16 = [_hoisted_14];
+var _hoisted_17 = ["innerHTML"];
+var _hoisted_18 = {
+  key: 5,
+  "class": "mt-2"
+};
+var _hoisted_19 = {
+  "class": "modal-footer"
+};
+var _hoisted_20 = {
   key: 0,
   type: "button",
-  "class": "btn btn-secondary",
+  "class": "btn btn-secondary m-3",
   "data-bs-dismiss": "modal",
   "aria-label": "Close"
 };
-var _hoisted_14 = {
+var _hoisted_21 = {
   key: 2,
   type: "button",
-  "class": "btn btn-primary",
+  "class": "btn btn-primary m-3",
   onclick: "location.reload();"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.modalTitle), 1 /* TEXT */), _hoisted_5]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [$props.checkoutSuccess ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.checkoutSuccess), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.checkoutFailure ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.checkoutFailure), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.modalTitle), 1 /* TEXT */), _hoisted_5]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [$props.modalWarning ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.modalWarning) + " ", 1 /* TEXT */), _hoisted_9])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.checkoutSuccess ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.checkoutSuccess), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.checkoutFailure ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.checkoutFailure), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.modalTitle == 'Info' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, _hoisted_16)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$props.checkoutSuccess ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    key: 4,
     innerHTML: $props.modalDescription
-  }, null, 8 /* PROPS */, _hoisted_9), !$props.checkoutSuccess && $props.hasFormFields ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 8 /* PROPS */, _hoisted_17)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$props.checkoutSuccess && $props.hasFormFields && $props.modalTitle != 'Return Book' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
+    "class": "form-control",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.referenceNumber = $event;
     }),
-    id: "referenceNumber"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.referenceNumber]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [!$props.checkoutSuccess ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_13, "Close")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$props.checkoutSuccess && $props.hasFormFields ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    id: "referenceNumber",
+    placeholder: "Reference"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.referenceNumber]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [!$props.checkoutSuccess ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_20, "Close")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$props.checkoutSuccess && $props.hasFormFields ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 1,
     type: "button",
-    "class": "btn btn-primary",
+    "class": "btn btn-primary mr-3",
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.handleClick && $options.handleClick.apply($options, arguments);
     })
-  }, "Submit")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.checkoutSuccess ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_14, "Go back to your book!")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]);
+  }, "Submit")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.checkoutSuccess ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_21, "Go back to your book!")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]);
 }
 
 /***/ }),
@@ -20302,30 +20538,31 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_6 = {
   key: 0
 };
-var _hoisted_7 = {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "/users/profile/edit"
-};
-var _hoisted_8 = {
+}, " Profile", -1 /* HOISTED */);
+var _hoisted_8 = [_hoisted_7];
+var _hoisted_9 = {
   key: 1
 };
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "/logout"
 }, " Logout", -1 /* HOISTED */);
-var _hoisted_10 = [_hoisted_9];
-var _hoisted_11 = {
+var _hoisted_11 = [_hoisted_10];
+var _hoisted_12 = {
   key: 2
 };
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "/login"
 }, " Login/Register", -1 /* HOISTED */);
-var _hoisted_13 = [_hoisted_12];
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_14 = [_hoisted_13];
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   "class": "btn btn-primary",
   type: "submit"
 }, "Search", -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    <nav class=\"navbar navbar-expand-lg bg-secondary text-uppercase fixed-top\" id=\"mainNav\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        <div class=\"container\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <a class=\"navbar-brand\" href=\"#page-top\">Welcome</a>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <button class=\"navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                Menu"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <i class=\"fas fa-bars\"></i>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </button>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <ul class=\"navbar-nav ms-auto\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <li class=\"nav-item mx-0 mx-lg-1\"><a class=\"nav-link py-3 px-0 px-lg-3 rounded\" href=\"#contact\">Contact</a></li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <li class=\"nav-item mx-0 mx-lg-1\"><a class=\"nav-link py-3 px-0 px-lg-3 rounded\" href=\"/books\">Books</a></li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <li class=\"nav-item mx-0 mx-lg-1\"><a class=\"nav-link py-3 px-0 px-lg-3 rounded\" href=\"/bookshelf\">Bookshelf</a></li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </ul>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    </nav>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("header", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, _hoisted_4, _hoisted_5, $props.username ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_7, " Profile (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.username) + ")", 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.username ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_8, _hoisted_10)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_11, _hoisted_13)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    <nav class=\"navbar navbar-expand-lg bg-secondary text-uppercase fixed-top\" id=\"mainNav\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        <div class=\"container\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <a class=\"navbar-brand\" href=\"#page-top\">Welcome</a>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <button class=\"navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                Menu"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <i class=\"fas fa-bars\"></i>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </button>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <ul class=\"navbar-nav ms-auto\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <li class=\"nav-item mx-0 mx-lg-1\"><a class=\"nav-link py-3 px-0 px-lg-3 rounded\" href=\"#contact\">Contact</a></li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <li class=\"nav-item mx-0 mx-lg-1\"><a class=\"nav-link py-3 px-0 px-lg-3 rounded\" href=\"/books\">Books</a></li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <li class=\"nav-item mx-0 mx-lg-1\"><a class=\"nav-link py-3 px-0 px-lg-3 rounded\" href=\"/bookshelf\">Bookshelf</a></li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </ul>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    </nav>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("header", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, _hoisted_4, _hoisted_5, $props.username ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_6, _hoisted_8)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.username ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_9, _hoisted_11)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_12, _hoisted_14)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.searchRef && $options.searchRef.apply($options, arguments);
     }, ["prevent"])),
@@ -20342,7 +20579,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "reference",
     placeholder: "Reference",
     name: "reference"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.searchQuery]]), _hoisted_14], 32 /* HYDRATE_EVENTS */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    <nav>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        <ul class=\"flex space-x-6\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <NavLink href=\"/\" :active=\"$page.component === 'Home'\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    Home"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </NavLink>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <NavLink href=\"/books\" :active=\"$page.component === 'Books'\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    Books"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </NavLink>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <NavLink href=\"/users\" :active=\"$page.component === 'Users'\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    Users"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </NavLink>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <NavLink href=\"/users/create\" :active=\"$page.component === 'Register'\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    Register"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </NavLink>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <NavLink href=\"/logout\" method=\"post\" as=\"button\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    Log Out"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </NavLink>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        </ul>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    </nav>")], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */);
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.searchQuery]]), _hoisted_15], 32 /* HYDRATE_EVENTS */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    <nav>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        <ul class=\"flex space-x-6\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <NavLink href=\"/\" :active=\"$page.component === 'Home'\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    Home"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </NavLink>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <NavLink href=\"/books\" :active=\"$page.component === 'Books'\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    Books"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </NavLink>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <NavLink href=\"/users\" :active=\"$page.component === 'Users'\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    Users"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </NavLink>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <NavLink href=\"/users/create\" :active=\"$page.component === 'Register'\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    Register"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </NavLink>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <NavLink href=\"/logout\" method=\"post\" as=\"button\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    Log Out"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </NavLink>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        </ul>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    </nav>")], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */);
 }
 
 /***/ }),
@@ -23333,6 +23570,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=\"file\"] {\n    color: t
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Books/Show.vue?vue&type=style&index=0&id=e723c66a&lang=css":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Books/Show.vue?vue&type=style&index=0&id=e723c66a&lang=css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-icon {\n        cursor: pointer; border: 1px solid #000; border-radius: 10px; padding: 7px; width:50px\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/runtime/api.js":
 /*!*****************************************************!*\
   !*** ./node_modules/css-loader/dist/runtime/api.js ***!
@@ -23553,6 +23814,126 @@ module.exports = deepmerge_1;
 
 /***/ }),
 
+/***/ "./resources/js/Shared/Icons/book.svg":
+/*!********************************************!*\
+  !*** ./resources/js/Shared/Icons/book.svg ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/book.svg?c51b442de8959ab1e55cc3e78f453386");
+
+/***/ }),
+
+/***/ "./resources/js/Shared/Icons/bookmarkHeart.svg":
+/*!*****************************************************!*\
+  !*** ./resources/js/Shared/Icons/bookmarkHeart.svg ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/bookmarkHeart.svg?aadea765b0559c1cdce88650aea1cf3b");
+
+/***/ }),
+
+/***/ "./resources/js/Shared/Icons/bookmarkStar.svg":
+/*!****************************************************!*\
+  !*** ./resources/js/Shared/Icons/bookmarkStar.svg ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/bookmarkStar.svg?ce0b66d138dbac3178d9442c01f1361d");
+
+/***/ }),
+
+/***/ "./resources/js/Shared/Icons/checkout.svg":
+/*!************************************************!*\
+  !*** ./resources/js/Shared/Icons/checkout.svg ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/checkout.svg?ab76229cab0df81219e4ddff1b9f2b50");
+
+/***/ }),
+
+/***/ "./resources/js/Shared/Icons/checkoutReturn.svg":
+/*!******************************************************!*\
+  !*** ./resources/js/Shared/Icons/checkoutReturn.svg ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/checkoutReturn.svg?1779ca407bcb32386c41b81f362d9ddd");
+
+/***/ }),
+
+/***/ "./resources/js/Shared/Icons/close.svg":
+/*!*********************************************!*\
+  !*** ./resources/js/Shared/Icons/close.svg ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/close.svg?8a96217de6ece9399335a88273932ef7");
+
+/***/ }),
+
+/***/ "./resources/js/Shared/Icons/edit.svg":
+/*!********************************************!*\
+  !*** ./resources/js/Shared/Icons/edit.svg ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/edit.svg?3bb70a9771e41b193ffddc1a3964b67b");
+
+/***/ }),
+
+/***/ "./resources/js/Shared/Icons/info.svg":
+/*!********************************************!*\
+  !*** ./resources/js/Shared/Icons/info.svg ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/info.svg?077ee5ffbed8bbaef92e4fea3ba7667b");
+
+/***/ }),
+
 /***/ "./resources/js/Shared/Icons/people.svg":
 /*!**********************************************!*\
   !*** ./resources/js/Shared/Icons/people.svg ***!
@@ -23580,6 +23961,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/plane.svg?7a9c1a67550c9626b3d911bf243cde08");
+
+/***/ }),
+
+/***/ "./resources/js/Shared/Icons/qr.svg":
+/*!******************************************!*\
+  !*** ./resources/js/Shared/Icons/qr.svg ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/qr.svg?c5654db217d63833233eb4d319fd83bb");
 
 /***/ }),
 
@@ -54063,6 +54459,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Books/Show.vue?vue&type=style&index=0&id=e723c66a&lang=css":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Books/Show.vue?vue&type=style&index=0&id=e723c66a&lang=css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Show_vue_vue_type_style_index_0_id_e723c66a_lang_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Show.vue?vue&type=style&index=0&id=e723c66a&lang=css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Books/Show.vue?vue&type=style&index=0&id=e723c66a&lang=css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Show_vue_vue_type_style_index_0_id_e723c66a_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Show_vue_vue_type_style_index_0_id_e723c66a_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -54582,13 +55008,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Show_vue_vue_type_template_id_e723c66a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Show.vue?vue&type=template&id=e723c66a */ "./resources/js/Pages/Books/Show.vue?vue&type=template&id=e723c66a");
 /* harmony import */ var _Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Show.vue?vue&type=script&lang=js */ "./resources/js/Pages/Books/Show.vue?vue&type=script&lang=js");
-/* harmony import */ var _var_www_html_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Show_vue_vue_type_style_index_0_id_e723c66a_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Show.vue?vue&type=style&index=0&id=e723c66a&lang=css */ "./resources/js/Pages/Books/Show.vue?vue&type=style&index=0&id=e723c66a&lang=css");
+/* harmony import */ var _var_www_html_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_var_www_html_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Show_vue_vue_type_template_id_e723c66a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Books/Show.vue"]])
+
+
+const __exports__ = /*#__PURE__*/(0,_var_www_html_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Show_vue_vue_type_template_id_e723c66a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Books/Show.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -55632,6 +56061,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Create_vue_vue_type_style_index_0_id_e983946c_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Create.vue?vue&type=style&index=0&id=e983946c&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Books/Create.vue?vue&type=style&index=0&id=e983946c&lang=css");
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Books/Show.vue?vue&type=style&index=0&id=e723c66a&lang=css":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/Pages/Books/Show.vue?vue&type=style&index=0&id=e723c66a&lang=css ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Show_vue_vue_type_style_index_0_id_e723c66a_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Show.vue?vue&type=style&index=0&id=e723c66a&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Books/Show.vue?vue&type=style&index=0&id=e723c66a&lang=css");
 
 
 /***/ }),

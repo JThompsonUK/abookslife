@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
+use function PHPUnit\Framework\isNull;
+
 class Book extends Model
 {
     use HasFactory, SoftDeletes;
@@ -122,28 +124,28 @@ class Book extends Model
     /**
      * See if the book is currently checked out
      */
-    public static function isBookCheckedOut($book)
+    public function isBookCheckedOut()
     {
-        return $book->bookCheckout->whereNull('checkin_date')->isNotEmpty();
+        return $this->bookCheckout->whereNull('checkin_date')->isNotEmpty();
     }
 
     /**
      * See if the book is checked out to the current user
      */
-    public static function isBookWithUser($book)
+    public function isBookWithUser()
     {
         if (Auth::user()) {
-            return $book->bookCheckout->where('user_id', Auth::user()->id)->sortByDesc('created_at')->first();
+            return $this->bookCheckout->where('user_id', Auth::user()->id)->sortByDesc('created_at')->first();
         }
     }
 
     /**
      * See if the book was last checked out by the current user
      */
-    public static function wasBookLastWithUser($book)
+    public function wasBookLastWithUser()
     {
         if (Auth::user()) {
-            return $book->bookCheckout()
+            return $this->bookCheckout()
                 ->latest('checkin_date')
                 ->get()
                 ->where('user_id', Auth::user()->id)
@@ -152,16 +154,17 @@ class Book extends Model
     }
 
     public function getImageAttribute() {
-        return asset('storage/images/' . basename($this->book_cover));
+        if (!isNull( $this->book_cover )) {
+            return asset('storage/images/' . basename($this->book_cover));
+        };
     }
-
 
     /**
      * Get the locations for each checkout
      */
-    public static function checkoutMarkers($book)
+    public function checkoutMarkers()
     {
-        $markers = $book->bookCheckout->map(function ($book) {
+        $markers = $this->bookCheckout->map(function ($book) {
             return [
                 'lat' => floatval($book->lat),
                 'lng' => floatval($book->lng),
@@ -170,5 +173,5 @@ class Book extends Model
 
         return $markers;
     }
-
+    
 }

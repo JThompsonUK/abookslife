@@ -22,13 +22,14 @@ class BooksController extends Controller
     {
         return Inertia::render('Books/Index', [
             'books' => Book::query()
+                ->orderBy('book_title')
                 ->when(Request::input('search'), function ($query, $search) {
                     $query->where('book_title', 'like', "%{$search}%");
                 })
                 ->paginate(10)
                 ->withQueryString()
                 ->through(function ($book) {
-                    $checkoutMarkers = Book::checkoutMarkers($book);
+                    $checkoutMarkers = $book->checkoutMarkers();
                     $distanceTravelled = round(BookCheckout::calculateHaversineDistance($checkoutMarkers), 0);
 
                     return [
@@ -39,6 +40,8 @@ class BooksController extends Controller
                         'image' => $book->image,
                         'book_checkout' => $book->bookCheckout,
                         'distance_travelled' => $distanceTravelled,
+                        'isOwner' => Auth::user() ? $book->user_id_owner == Auth::user()->id : null,
+                        'userHasRead' => $book->bookCheckout->pluck('user_id')->contains(Auth::user()->id),
                     ];
                 }),
             'filters' => Request::only(['search']),
@@ -50,6 +53,7 @@ class BooksController extends Controller
     {
         return Inertia::render('Books/Bookshelf', [
             'books' => Book::with('bookCheckout')
+                ->orderBy('user_id_owner')
                 ->orderBy('book_title')
                 ->where(function ($query) {
                     $query->where('user_id_owner', Auth::id())
@@ -59,14 +63,16 @@ class BooksController extends Controller
                 })
                 ->get()
                 ->transform(function ($book) {
-                    $checkoutMarkers = Book::checkoutMarkers($book);
+                    $checkoutMarkers = $book->checkoutMarkers();
                     $distanceTravelled = round(BookCheckout::calculateHaversineDistance($checkoutMarkers), 0);
                     
                     return [
                         'uuid' => $book->uuid,
                         'book_title' => $book->book_title,
+                        'book_genre' => $book->book_genre,
                         'book_author' => $book->book_author,
-                        'isOwner' => $book->user_id_owner == Auth::user()->id,
+                        'isOwner' => Auth::user() ? $book->user_id_owner == Auth::user()->id : null,
+                        'userHasRead' => $book->bookCheckout->pluck('user_id')->contains(Auth::user()->id),
                         'image' => $book->image,
                         'book_checkout' => $book->bookCheckout,
                         'distance_travelled' => $distanceTravelled,
@@ -186,12 +192,6 @@ class BooksController extends Controller
             ];
         })->sortByDesc('created')->values();
 
-        $isCheckedOut = Book::isBookCheckedOut($book);
-        $isWithUser = Book::isBookWithUser($book);
-        $lastWithUser = Book::wasBookLastWithUser($book);
-        $checkoutMarkers = Book::checkoutMarkers($book);
-        $distanceTravelled = round(BookCheckout::calculateHaversineDistance($checkoutMarkers), 0);
-
         $firstBook = $book->bookCheckout->first();
         $mapCenter = [
             'lat' => floatval($firstBook ? $firstBook->lat : 0),
@@ -201,13 +201,14 @@ class BooksController extends Controller
         return Inertia::render('Books/Show', [
             'book' => $book,
             'comments' => $comments,
-            'isOwner' => Auth::user() && $book->user_id_owner == Auth::user()->id,
-            'isCheckedOut' => $isCheckedOut,
-            'isWithUser' => $isWithUser,
-            'lastWithUser' => $lastWithUser,
-            'markers' => $checkoutMarkers,
+            'isOwner' => Auth::user() ? $book->user_id_owner == Auth::user()->id : null,
+            'userHasRead' => Auth::user() ? $book->bookCheckout->pluck('user_id')->contains(Auth::user()->id) : null,
+            'isCheckedOut' => $book->isBookCheckedOut(),
+            'isWithUser' => $book->isBookWithUser(),
+            'lastWithUser' => $book->wasBookLastWithUser(),
+            'markers' => $book->checkoutMarkers(),
             'mapCenter' => $mapCenter,
-            'distanceTravelled' => $distanceTravelled,
+            'distanceTravelled' => round(BookCheckout::calculateHaversineDistance($book->checkoutMarkers()), 0),
             'loggedIn' => auth()->check(),
         ]);
     }
@@ -243,7 +244,7 @@ class BooksController extends Controller
         ]);
 
         return response()->json([
-            'data' => 'Book checked out',
+            'data' => 'Book checked out! Now enjoy reading and dont forget to check the book back in before passing to someone else!',
             'success' => true,
         ]);
 
@@ -263,7 +264,12 @@ class BooksController extends Controller
             'checkin_date' => Carbon::now(),
         ]);
 
-        return Redirect::back()->with('success', 'book returned. now pass to a friend or charity shop for the next reader to enjoy!');
+        return response()->json([
+            'data' => 'book returned. now pass to a friend or charity shop for the next reader to enjoy!.',
+            'success' => true,
+        ]);
+
+        // return Redirect::back()->with('success', '');
 
     }
 

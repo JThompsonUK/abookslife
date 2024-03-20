@@ -12,6 +12,8 @@ Add a book to the site and follow it's journey. Similar to when you checkout a b
 
 <a href="https://laravel.com/docs/10.x/sail">Laravel Sail</a> is a light-weight command-line interface for interacting with Laravel's default Docker development environment. 
 
+Ensure docker is running then: 
+
 ```bash
 ./vendor/bin/sail up
 ```

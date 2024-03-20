@@ -3,6 +3,11 @@
         <div class="py-2 d-flex justify-content-center">
             <h5>Checkout Card</h5>
         </div>
+        <div v-if="modalWarning" class="text-danger">
+                <p class="text-center">
+                    {{ modalWarning }}
+                </p>
+            </div>
         <table class="table" style="width: 100%;">
             <thead>
             <tr>
@@ -48,7 +53,8 @@ export default {
 
     props: {
         bookCheckouts: Object,
-        bookId: Number
+        bookId: Number,
+        modalWarning: String,
     },
 
     methods: {

@@ -23,7 +23,7 @@
             <a href="/books"> Books </a>
             <a href="/bookshelf"> Bookshelf</a>
             <span v-if="username">
-                <a href="/users/profile/edit"> Profile ({{username}})</a>
+                <a href="/users/profile/edit"> Profile</a>
             </span>
             <span v-if="username">
                 <a href="/logout"> Logout</a>
