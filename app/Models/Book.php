@@ -140,26 +140,6 @@ class Book extends Model
     }
 
     /**
-     * See if the book was last checked out by the current user
-     */
-    public function wasBookLastWithUser()
-    {
-        if (Auth::user()) {
-            return $this->bookCheckout()
-                ->latest('checkin_date')
-                ->get()
-                ->where('user_id', Auth::user()->id)
-                ->whereNotNull('checkin_date')->isNotEmpty();
-        }
-    }
-
-    public function getImageAttribute() {
-        if (!isNull( $this->book_cover )) {
-            return asset('storage/images/' . basename($this->book_cover));
-        };
-    }
-
-    /**
      * Get the locations for each checkout
      */
     public function checkoutMarkers()
@@ -172,6 +152,12 @@ class Book extends Model
         })->toArray();
 
         return $markers;
+    }
+
+    public function getImageAttribute() {
+        if ( $this->book_cover ) {
+            return asset('storage/images/' . basename($this->book_cover));
+        };
     }
     
 }

@@ -41,7 +41,7 @@ class BooksController extends Controller
                         'book_checkout' => $book->bookCheckout,
                         'distance_travelled' => $distanceTravelled,
                         'isOwner' => Auth::user() ? $book->user_id_owner == Auth::user()->id : null,
-                        'userHasRead' => $book->bookCheckout->pluck('user_id')->contains(Auth::user()->id),
+                        'userHasRead' => Auth::user() ? $book->bookCheckout->pluck('user_id')->contains(Auth::user()->id) : null,
                     ];
                 }),
             'filters' => Request::only(['search']),
@@ -109,12 +109,14 @@ class BooksController extends Controller
             $description = $item['volumeInfo']['description'] ?? null;
             $author = $item['volumeInfo']['authors'][0] ?? null;
             $thumbnail = $item['volumeInfo']['imageLinks']['thumbnail'] ?? null;
+            $genre = $item['volumeInfo']['categories'][0] ?? null;
 
             $filterItems[] = [
                 'title' => $title,
                 'description' => $description,
                 'author' => $author,
-                'thumbnail' => $thumbnail
+                'thumbnail' => $thumbnail,
+                'genre' => $genre
             ];
         }
 
@@ -148,6 +150,8 @@ class BooksController extends Controller
             'reference' => Book::generateUniqueReference(),
             'book_title' => Request::get('book_title'),
             'book_author' => Request::get('book_author'),
+            'description' => Request::get('description'),
+            'book_genre' => Request::get('book_genre'),
             'user_id_owner' => Auth::id(),
             'book_cover' => $image ?? null,
         ]);
@@ -205,7 +209,6 @@ class BooksController extends Controller
             'userHasRead' => Auth::user() ? $book->bookCheckout->pluck('user_id')->contains(Auth::user()->id) : null,
             'isCheckedOut' => $book->isBookCheckedOut(),
             'isWithUser' => $book->isBookWithUser(),
-            'lastWithUser' => $book->wasBookLastWithUser(),
             'markers' => $book->checkoutMarkers(),
             'mapCenter' => $mapCenter,
             'distanceTravelled' => round(BookCheckout::calculateHaversineDistance($book->checkoutMarkers()), 0),
@@ -275,24 +278,27 @@ class BooksController extends Controller
 
     public function update(\Illuminate\Http\Request $request, Book $book)
     {
-        $path = null;
-        if ($request->hasFile('book_cover')) {
-            // Delete the existing file if it exists
-            if ($book->book_cover) {
-                Storage::disk('public')->delete($book->book_cover);
+        // if uploading an image from Google Books API then generate unique id and store the image data in 'public/images' directory
+        $googleBooksImage = $request->input('book_cover');
+        $uploadedImage = $request->file('book_cover');
+
+        if ( $googleBooksImage ) {
+
+            try {
+                $imageData = file_get_contents($googleBooksImage);
+                $filename = uniqid() . '.jpg';
+                Storage::disk('public')->put('images/' . $filename, $imageData);
+                $image = 'images/' . $filename;
+            } catch (\Exception $e) {
+                logger($e->getMessage());
             }
 
-            // Store the file and get the path
-            $path = $request->file('book_cover')->store('images', 'public');
-        }
-
-        $image = $path;
-        if ( !$path && $book->book_cover ) {
-            $image = $book->book_cover;
+        } else if ( $uploadedImage ) {
+            $image = $request->file('book_cover')->store('images', 'public');
         }
 
         $book->update([
-            'book_cover' => $image,
+            'book_cover' => $image ?? null,
             'book_title' => Request::get('book_title'),
             'book_author' => Request::get('book_author'),
             'book_genre' => Request::get('book_genre'),
@@ -319,32 +325,6 @@ class BooksController extends Controller
             return redirect()->route('book.show', ['book' => $book->first()]);
         }
     }
-
-    // public function update(Book $id, HttpRequest $request)
-    // {
-    //     dd('where is this being called');
-    //     // $image = $request->file('image');
-    //     // $imageName = time().'.'.$image->getClientOriginalExtension();
-
-        
-    //     try {
-    //         // Log request data before dd
-    //         logger($request->all());
-
-    //         // Dump and die to inspect the data
-    //         dd($request->all());
-
-    //         // Rest of your update logic...
-    //     } catch (\Exception $e) {
-    //         // Log the exception
-    //         logger($e->getMessage());
-
-    //         // Return a response indicating failure
-    //         return response()->json(['error' => 'Internal Server Error'], 500);
-    //     }
-
-    //     return Redirect::back()->with('success', 'book updated.');
-    // }
 
 }
 

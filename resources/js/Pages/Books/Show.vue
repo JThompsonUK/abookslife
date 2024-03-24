@@ -88,7 +88,12 @@
                                 </div>
 
                                 <!-- if user is logged in an wasnt the last person to check out book -->
-                                <div v-else-if="!this.lastWithUser && loggedIn" class="mr-1">
+                                <!-- <div v-else-if="!this.lastWithUser && loggedIn" class="mr-1">
+                                    <img src='../../Shared/Icons/checkout.svg' alt="checkout book" class="custom-icon" @click="checkoutModal" />
+                                </div> -->
+                                
+                                <!-- if book is not checked out and user is logged in-->
+                                <div v-else-if="loggedIn" class="mr-1">
                                     <img src='../../Shared/Icons/checkout.svg' alt="checkout book" class="custom-icon" @click="checkoutModal" />
                                 </div>
 
@@ -243,7 +248,6 @@ export default {
         comments: Object,
         isCheckedOut: Boolean,
         isWithUser: Object,
-        lastWithUser: Boolean,
         isOwner: Boolean,
         userHasRead: Boolean,
         distanceTravelled: Number,
@@ -284,10 +288,10 @@ export default {
                 } else {
                     return "This is still checked out by another user, however, you can still checkout the book";
                 }
-                } else {
-                if (this.lastWithUser) {
-                    return "This was last checked out by you! Pass this book to someone else to read.";
-                }
+            } else if (this.userHasRead) {
+                return "You have previously read this book.";
+            } else {
+                return "This book is available to check out";
             }
         }
     },
