@@ -44,7 +44,7 @@
                 <div class="d-grid">
                     <button
                         type="submit"
-                        class="btn btn-primary"
+                        class="btn btn-info mr-2"
                         :disabled="form.processing"
                     >
                         Log In

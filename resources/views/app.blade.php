@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
+    
 {{--    <script src="https://cdn.tailwindcss.com"></script>--}}
 
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />

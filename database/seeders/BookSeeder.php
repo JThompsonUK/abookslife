@@ -21,7 +21,7 @@ class BookSeeder extends Seeder
                 'book_title' => $book['title'],
                 'book_author' => $book['author'],
                 'book_genre' => $book['genre'],
-                'book_year' => is_numeric($book['year']) ? $book['year'] : null,
+                'published' => is_numeric($book['year']) ? $book['year'] : null,
                 'description' => $book['description'],
             ]);
         }

@@ -45,6 +45,17 @@ return [
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
 
+        'mailhog' => [
+            'transport' => 'smtp',
+            'host' => env('MAILHOG_HOST', '127.0.0.1'),
+            'port' => env('MAILHOG_PORT', 1025),
+            'encryption' => null, // MailHog doesn't require encryption
+            'username' => null,   // MailHog doesn't require authentication
+            'password' => null,   // MailHog doesn't require authentication
+            'timeout' => null,
+            'local_domain' => env('MAIL_EHLO_DOMAIN'),
+        ],
+
         'ses' => [
             'transport' => 'ses',
         ],
@@ -55,6 +66,7 @@ return [
 
         'postmark' => [
             'transport' => 'postmark',
+            'token' => env('POSTMARK_TOKEN'),
         ],
 
         'sendmail' => [
@@ -78,6 +90,10 @@ return [
                 'log',
             ],
         ],
+
+        // Set the default mailer to use based on the environment
+        'default_mailer' => env('MAIL_MAILER', 'smtp'),
+
     ],
 
     /*

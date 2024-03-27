@@ -26,6 +26,13 @@ php artisan db:seed
 npm run watch
 ```
 
+## Email
+
+mailhog for local testing (see docker-compose)
+```bash
+http://localhost:8025/
+```
+
 ## Authentication
 
 ```bash

@@ -16,6 +16,8 @@ use Inertia\Inertia;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request as HttpRequest;
+use App\Mail\WelcomeEmail;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -69,7 +71,7 @@ class UserController extends Controller
     /**
      * @throws \Exception
      */
-    public function store()
+    public function store(HttpRequest $request)
     {
         // In case of failure (e.g., non-unique email)
         try {
@@ -85,7 +87,9 @@ class UserController extends Controller
                 'password' => Request::get('password'),
             ]);
 
-            return Redirect::route('login')->with('success', 'User created. Now login to confirm details are correct');
+            Mail::to($request->get('email'))->send(new WelcomeEmail(Request::get('name')));
+
+            return Redirect::route('login')->with('success', 'User created. Now login to get started');
         } catch (\Illuminate\Validation\ValidationException $e) {
             return Redirect::route('register')
                 ->withErrors($e->validator->getMessageBag())

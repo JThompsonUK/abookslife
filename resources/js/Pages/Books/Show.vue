@@ -78,23 +78,25 @@
 
                             <div class="mt-2 d-flex justify-content-end">
                                 <!-- if book is with current user -->
-                                <div v-if="this.isCheckedOut" class="mr-1">
-                                    <div v-if="this.isWithUser">
-                                        <img src='../../Shared/Icons/checkoutReturn.svg' alt="return" class="custom-icon" @click="returnModal" />
+                                <div v-if="loggedIn">
+                                    <div v-if="this.isCheckedOut" class="mr-1">
+                                        <div v-if="this.isWithUser">
+                                            <img src='../../Shared/Icons/checkoutReturn.svg' alt="return" class="custom-icon" @click="returnModal" />
+                                        </div>
+                                        <div v-else>
+                                            <img src='../../Shared/Icons/checkout.svg' alt="checkout book" class="custom-icon" @click="checkoutModal" />
+                                        </div>
                                     </div>
-                                    <div v-else>
+                                    
+                                    <!-- if book is not checked out and user has already read the book-->
+                                    <div v-else-if="userHasRead" class="mr-1">
+                                        <img src='../../Shared/Icons/checkout.svg' alt="checkout book" class="custom-icon" @click="checkoutAgainModal" />
+                                    </div>
+
+                                    <!-- if book is not checked out and user hasnt read the book-->
+                                    <div v-else class="mr-1">
                                         <img src='../../Shared/Icons/checkout.svg' alt="checkout book" class="custom-icon" @click="checkoutModal" />
                                     </div>
-                                </div>
-
-                                <!-- if user is logged in an wasnt the last person to check out book -->
-                                <!-- <div v-else-if="!this.lastWithUser && loggedIn" class="mr-1">
-                                    <img src='../../Shared/Icons/checkout.svg' alt="checkout book" class="custom-icon" @click="checkoutModal" />
-                                </div> -->
-                                
-                                <!-- if book is not checked out and user is logged in-->
-                                <div v-else-if="loggedIn" class="mr-1">
-                                    <img src='../../Shared/Icons/checkout.svg' alt="checkout book" class="custom-icon" @click="checkoutModal" />
                                 </div>
 
                                 <!-- if current user is original owner of book -->
@@ -107,40 +109,34 @@
                             </div>
 
                             <!-- CHECKOUT -->
-                            <div v-if="!loggedIn" class="text-danger text-left">
-                                <a :href="`/login?redirect=/books/${book.uuid}`">Login/Register</a> to checkout this Book  
+                            <div v-if="!loggedIn" class="mt-2 d-flex justify-content-end">
+                                <a :href="`/login?redirect=/books/${book.uuid}`" class="btn btn-info">Login/Register</a>
                             </div>
 
-                            <!-- <div v-else class="text-danger text-left mt-2"> -->
-                                <!-- <div v-if="this.isCheckedOut">
-                                    <div v-if="this.isWithUser">
-                                        This is checked out by you
-                                    </div>
-                                    <div v-else>
-                                        This is still checked out by another user, however, you can still checkout the book
-                                    </div>
-                                </div>
-                                <div v-else>
-                                    <div v-if="this.lastWithUser">
-                                        This was last checked out by you! pass this book to someone else to read.
-                                    </div>
-                                    <div v-else>
-                                    </div>
-                                </div> -->
-                            <!-- </div> -->
-
                         </div>
-
                     </div>
                 </div>
             </div>
-
+            
             <!-- INFO MODAL -->
             <div id="infoModal" class="modal fade" role="dialog">
                 <Modal
                     modalTitle="Info"
                     :modalDescription="modalDescription"
                     :modalWarning="modalWarning"
+                />
+            </div>
+
+            <!-- RETURNING USER MODAL -->
+            <div id="checkoutAgainModal" class="modal fade" role="dialog">
+                <Modal
+                    :checkoutSuccess="checkoutSuccess"
+                    :checkoutFailure="checkoutFailure"
+                    modalTitle="Checkout book again?"
+                    modalDescription="You have already read this book. Are you sure you want to again?"
+                    :hasFormFields="true"
+                    :refRequired="false"
+                    @child-click="checkout"
                 />
             </div>
 
@@ -152,6 +148,7 @@
                     :modalTitle="modalTitle"
                     modalDescription="This is the reference number found next to the QR code or hand-written in the book. This confirms that you are in possession of the book."
                     :hasFormFields="true"
+                    :refRequired="true"
                     @child-click="checkout"
                 />
             </div>
@@ -176,7 +173,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="h-100 p-5 bg-light border rounded-3">
+                    <div class="h-100 p-5 bg-light">
                     <h2>Books Journey</h2>
                         <p>Google map with pins from checkout card here</p>
                        <!-- <GoogleMap
@@ -317,18 +314,23 @@ export default {
         },
 
         infoModal() {
-          var infoModal = new bootstrap.Modal(document.getElementById('infoModal'));
-          infoModal.show();
+            var infoModal = new bootstrap.Modal(document.getElementById('infoModal'));
+            infoModal.show();
+        },
+
+        checkoutAgainModal() {
+            var checkoutAgainModal = new bootstrap.Modal(document.getElementById('checkoutAgainModal'));
+            checkoutAgainModal.show();
         },
 
         checkoutModal() {
-          var checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
-          checkoutModal.show();
+            var checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
+            checkoutModal.show();
         },
 
         returnModal() {
-          var returnModal = new bootstrap.Modal(document.getElementById('returnModal'));
-          returnModal.show();
+            var returnModal = new bootstrap.Modal(document.getElementById('returnModal'));
+            returnModal.show();
         },
 
         checkout(referenceNumber) {

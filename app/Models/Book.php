@@ -28,7 +28,7 @@ class Book extends Model
         'book_author',
         'book_genre',
         'description',
-        'book_year',
+        'published',
         'reference',
         'user_id_owner',
         'book_cover',

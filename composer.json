@@ -14,6 +14,8 @@
         "laravel/tinker": "^2.7",
         "spatie/laravel-permission": "*",
         "stevebauman/location": "^7.0",
+        "symfony/http-client": "^6.4",
+        "symfony/mailgun-mailer": "^6.4",
         "tightenco/ziggy": "^1.5"
     },
     "require-dev": {

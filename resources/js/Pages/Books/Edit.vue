@@ -1,6 +1,9 @@
 <template>
     <Head title="Book Item Edit" />
     <div class="py-4">
+        <div class="mb-2">
+            Edit book        
+        </div>
         <div class="p-5 mb-4 bg-light rounded-3">
             <form @submit.prevent="submitForm">
                 <div class="container-fluid row">
@@ -22,10 +25,11 @@
                     <div class="col-md-10">
                         <div class="form-row mb-3">
                             <div class="col-md-8 p-0">
-                                <label for="title">Title:</label>
+                                <label for="title">Title (start typing to auto populate):</label>
                                 <input v-model="form.book_title" @input="debouncedSearch" type="text" class="form-control" id="title" placeholder="Title" name="title" required />
+                                
                                 <!-- Books from Google Books API response -->
-                                <div v-if="searchResults.length">
+                                <div v-if="searchResults.length" style="overflow: scroll; max-height: 500px;">
                                     <div class="row search-results" v-for="result in searchResults" :key="result.id" @click="selectBook(result)">
                                         <div class="col-md-1">
                                             <img v-if="result.thumbnail" :src="result.thumbnail" alt="Book Cover Image" style="width: 40px;" />
@@ -35,6 +39,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="col-md-4 pr-0">
                                 <label for="genre">Genre</label>
@@ -42,8 +47,14 @@
                             </div>
                         </div>
                         <div class="form-row mb-3">
-                            <label for="author">Author</label>
-                            <input v-model="form.book_author" type="text" class="form-control" id="author" placeholder="Author" name="author" required />
+                            <div class="col-md-8 p-0">
+                                <label for="author">Author</label>
+                                <input v-model="form.book_author" type="text" class="form-control" id="author" placeholder="Author" name="author" required />
+                            </div>
+                            <div class="col-md-4 pr-0">
+                                <label for="published">Published Date</label>
+                                <input v-model="form.published" type="text" class="form-control" id="author" placeholder="Published Date" name="published" />
+                            </div>
                         </div>
                         <div class="form-row mb-3">
                             <label for="description">Description</label>
@@ -51,7 +62,7 @@
                         </div>
 
                         <div>
-                            <a :href="route('book.show', book.uuid)" class="btn btn-secondary">
+                            <a :href="route('book.show', book.uuid)" class="btn btn-info mr-2">
                                 Cancel
                             </a>    
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -80,6 +91,7 @@ export default {
                 book_genre: this.book.book_genre,
                 book_author: this.book.book_author,
                 description: this.book.description,
+                published: this.book.published,
             }),
             searchResults: [],
             imagePreview: this.book.image,
@@ -128,6 +140,7 @@ export default {
             this.form.book_cover = book.thumbnail;
             this.form.description = book.description;
             this.form.book_genre = book.genre;
+            this.form.published = book.published;
             this.searchResults = [];
             this.imagePreview = book.thumbnail;
 

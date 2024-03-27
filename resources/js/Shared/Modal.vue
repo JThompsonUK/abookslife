@@ -1,5 +1,4 @@
 <template>
-
     <div class="modal-dialog modal-dialog-centered" style="max-width: 50%;">
         <div class="modal-content">
             <div class="modal-header">
@@ -27,6 +26,7 @@
                     </p>
                 </span>
 
+                <!-- INFO MODAL -->
                 <div v-if="modalTitle == 'Info'">
                     <h6 class="mb-2">
                         Key:
@@ -69,7 +69,7 @@
 
                 <div v-if="!checkoutSuccess" v-html="modalDescription"></div>
 
-                <div v-if="!checkoutSuccess && hasFormFields && modalTitle != 'Return Book'" class="mt-2">
+                <div v-if="refRequired && !checkoutSuccess && hasFormFields && modalTitle != 'Return Book'" class="mt-2">
                     <input type="text" class="form-control" v-model="referenceNumber" id="referenceNumber" placeholder="Reference">
                 </div>
             </div>
@@ -94,6 +94,7 @@ export default {
         checkoutSuccess: String,
         checkoutFailure: String,
         hasFormFields: Boolean,
+        refRequired: Boolean,
     },
 
     data() {
@@ -104,6 +105,10 @@ export default {
 
     methods: {
         handleClick() {
+            // reference isnt required for users that have already checked out the book
+            if ( !this.refRequired ) {
+                this.referenceNumber = 'na';
+            }
             this.$emit('child-click', this.referenceNumber);
         },
     }

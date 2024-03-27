@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Stevebauman\Location\Facades\Location;
 use Illuminate\Http\Request as HttpRequest;
+use App\Mail\CheckoutEmail;
+use Illuminate\Support\Facades\Mail;
 
 class BooksController extends Controller
 {
@@ -86,7 +88,6 @@ class BooksController extends Controller
         return Inertia::render('Books/Create');
     }
 
-
     // call Google Books API and return all books matching the entered book_title
     public function storeSearch(HttpRequest $request)
     {
@@ -110,13 +111,15 @@ class BooksController extends Controller
             $author = $item['volumeInfo']['authors'][0] ?? null;
             $thumbnail = $item['volumeInfo']['imageLinks']['thumbnail'] ?? null;
             $genre = $item['volumeInfo']['categories'][0] ?? null;
+            $publishedDate = $item['volumeInfo']['publishedDate'] ?? null;
 
             $filterItems[] = [
                 'title' => $title,
                 'description' => $description,
                 'author' => $author,
                 'thumbnail' => $thumbnail,
-                'genre' => $genre
+                'genre' => $genre,
+                'published' => $publishedDate
             ];
         }
 
@@ -152,6 +155,7 @@ class BooksController extends Controller
             'book_author' => Request::get('book_author'),
             'description' => Request::get('description'),
             'book_genre' => Request::get('book_genre'),
+            'published' => Request::get('published'),
             'user_id_owner' => Auth::id(),
             'book_cover' => $image ?? null,
         ]);
@@ -225,31 +229,38 @@ class BooksController extends Controller
     public function checkout(Book $book, HttpRequest $request)
     {
         // user must enter the correct reference number to checkout book.
-        if ($request->input('reference') == $book->reference) {
+        // or if user has already checked out the book, then they know the reference, so dont need to enter it ('na')
+        // todo - ref alos not required if user scans qr code in the book
+        if ($request->input('reference') == $book->reference || $request->input('reference') == 'na') {
 
-        // Check if the app is running on localhost
-        if (app()->isLocal()) {
-            $ip = '86.176.180.25';
-        } else {
-            $ip = request()->ip();
-        }
+            // Check if the app is running on localhost
+            if (app()->isLocal()) {
+                $ip = '86.176.180.25';
+            } else {
+                $ip = request()->ip();
+            }
 
-        // Get location information based on IP
-        $location = Location::get($ip);
+            // Get location information based on IP
+            $location = Location::get($ip);
 
-        BookCheckout::create([
-            'user_id' => Auth::user()->id,
-            'book_id' => $book->id,
-            'checkout_date' => Carbon::now(),
-            'lat' => is_null($location) ? null : $location->latitude,
-            'lng' => is_null($location) ? null : $location->longitude,
-            'city' => is_null($location) ? null : $location->cityName,
-        ]);
+            BookCheckout::create([
+                'user_id' => Auth::user()->id,
+                'book_id' => $book->id,
+                'checkout_date' => Carbon::now(),
+                'lat' => is_null($location) ? null : $location->latitude,
+                'lng' => is_null($location) ? null : $location->longitude,
+                'city' => is_null($location) ? null : $location->cityName,
+            ]);
 
-        return response()->json([
-            'data' => 'Book checked out! Now enjoy reading and dont forget to check the book back in before passing to someone else!',
-            'success' => true,
-        ]);
+            // send email to book owner when someone checks their book out
+            if ( Auth::user()->id != $book->user_id_owner ) {
+                Mail::to(Auth::user()->email)->send(new CheckoutEmail(Auth::user()->name, $book->book_title, $book->uuid));
+            }
+
+            return response()->json([
+                'data' => 'Book checked out! Now enjoy reading and dont forget to check the book back in before passing to someone else!',
+                'success' => true,
+            ]);
 
         } else {
 
@@ -282,7 +293,8 @@ class BooksController extends Controller
         $googleBooksImage = $request->input('book_cover');
         $uploadedImage = $request->file('book_cover');
 
-        if ( $googleBooksImage ) {
+        // only update book_cover if a new image has been added.
+        if ( $googleBooksImage && $googleBooksImage != $book->book_cover ) {
 
             try {
                 $imageData = file_get_contents($googleBooksImage);
@@ -297,12 +309,15 @@ class BooksController extends Controller
             $image = $request->file('book_cover')->store('images', 'public');
         }
 
+        // dont update book_cover if no new image has been added.
         $book->update([
-            'book_cover' => $image ?? null,
+            // 'book_cover' => $image ?? null,
+            'book_cover' => ($googleBooksImage == $book->book_cover) ? $book->book_cover : ($image ?? null),
             'book_title' => Request::get('book_title'),
             'book_author' => Request::get('book_author'),
             'book_genre' => Request::get('book_genre'),
             'description' => Request::get('description'),
+            'published' => Request::get('published'),
         ]);
 
         return Redirect::back()->with('success', 'book updated.');
